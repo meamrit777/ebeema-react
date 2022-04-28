@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Drawer, Button, Row, Col, Form, Input, Space } from "antd";
 import { Link } from "react-router-dom";
 import "./index.css";
+import Recaptcha from "react-google-recaptcha";
+import Swal from "sweetalert2";
+
 import phoneIcon from "../../../components/pages/SvgIcons/frontend/phone.svg";
+import calculatorIcon from "../../../components/pages/SvgIcons/frontend/calculator.svg";
 
 function Phone() {
   const [visible, setVisible] = useState(false);
@@ -30,22 +34,79 @@ function Phone() {
     // setIsSubmit(true);
   };
   const requestButtonHandler = () => {
-    if (userFormValues.Name && userFormValues.phoneNo) {
-      console.log("True", userFormValues);
+    if (userFormValues.Name && userFormValues.phoneNo && userFormValues.email) {
+      Swal.fire({
+        icon: "success",
+        title: "success",
+        html: "Thank you, Our Corporate team will get back to you.",
+        // padding: "0 1em 1em",
+        width: 300,
+      });
+      // console.log("True", userFormValues);
     } else {
-      console.log("error", userFormValues);
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        html: "Complete your form details",
+        timerProgressBar: true,
+        padding: "0 1em 1em",
+        timer: 4000,
+        width: 300,
+      });
+      // console.log("error", userFormValues);
     }
   };
+
+  const handleToken = (token) => {
+    if (
+      (currentForm) => {
+        return { ...currentForm, token };
+      }
+    );
+  };
+  const handleExpire = () => {
+    if (
+      (currentForm) => {
+        return { ...currentForm, token: null };
+      }
+    );
+  };
+
   return (
     <>
-      <div className="phone-icon">
-        <img src={phoneIcon} alt="phone contact" onClick={showDrawer} />
+      <div className="side-nav">
+        <div>
+          <Link to="/calculator">
+            <img
+              src={calculatorIcon}
+              className="side-nav-calulator"
+              // style={{
+              //   backgroundColor: "#a13737",
+              //   padding: "10px",
+              //   borderRadius: "5px",
+              // }}
+              alt="calculator icon"
+              // className="calculator-icon"
+            />
+          </Link>
+        </div>
+
+        <div>
+          <img
+            src={phoneIcon}
+            alt="phone contact"
+            className="side-nav-phone"
+            // style={{ padding: "10px", borderRadius: "5px" }}
+            onClick={showDrawer}
+          />
+        </div>
       </div>
       {/* <Button type="primary" onClick={showDrawer}>
     Open
   </Button> */}
       <Drawer
-        title="Create a new account"
+        className="phone-drawer"
+        title="Request Callback"
         width={400}
         onClose={onClose}
         visible={visible}
@@ -70,7 +131,7 @@ function Phone() {
           </Form.Item>
 
           <Form.Item>
-            <label>Name</label>
+            <label>Full Name</label>
             <Input
               type="text"
               name="Name"
@@ -82,7 +143,7 @@ function Phone() {
           </Form.Item>
 
           <Form.Item>
-            <label>Email Address</label>
+            <label>Email</label>
             <Input
               type="email"
               name="email"
@@ -94,14 +155,22 @@ function Phone() {
           </Form.Item>
 
           <Form.Item>
-            <label>Name</label>
+            <label>Message</label>
             <Input.TextArea
               type="text"
               name="message"
               onChange={handleChange}
               value={userFormValues.message}
               placeholder="Type your messsage here"
-              style={{ height: 80 }}
+              style={{ height: 50 }}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Recaptcha
+              sitekey="6LdNw9odAAAAAGPD3DRi120MUwC1NTV-Ewy-t6lj"
+              onChange={handleToken}
+              onExpire={handleExpire}
             />
           </Form.Item>
 

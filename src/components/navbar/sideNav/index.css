@@ -1,16 +1,31 @@
-.phone-icon {
+.side-nav {
   position: fixed;
   right: 0%;
-  top: 50%;
-  background: #fff;
-  border: 1px solid rgba(61, 83, 140, 0.25);
+  top: 40%;
   box-sizing: border-box;
-  box-shadow: 0 4px 8px rgb(23 73 138 / 8%);
-  width: 30px;
-  height: 30px;
   display: flex;
-  flex-flow: row wrap;
-  border-radius: 50%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.side-nav-calulator {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #a13737;
+  box-shadow: 0 0 2px #ddd;
+}
+.side-nav-phone {
+  padding: 9px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #ddd;
+}
+.side-nav-phone:hover {
+  background-color: #a13737;
+  fill: white !important;
+}
+
+/* border: 1px solid rgba(61, 83, 140, 0.25);
+box-sizing: border-box; */
+/* .ant-drawer .ant-drawer-right .ant-drawer-open .phone-drawer.ant-drawer-title {
+  font-size: 25px !important;
+} */

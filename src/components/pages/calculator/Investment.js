@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Calculator.css";
 
 import { Form, Input, Radio, Space, Tooltip } from "antd";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import Swal from "sweetalert2";
 
 export const Investment = ({
   term,
