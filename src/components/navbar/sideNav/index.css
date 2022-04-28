@@ -1,0 +1,13 @@
+.phone-icon{
+    background: #fff;
+    border: 1px solid rgba(61, 83, 140, 0.25);
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgb(23 73 138 / 8%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+  }

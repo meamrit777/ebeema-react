@@ -1,0 +1,27 @@
+.social-container {
+  background: #3d538c;
+  padding: 5px;
+  padding-top: 0px;
+  padding-left: 15px;
+  height: 35px;
+}
+a.social {
+  margin: 5px;
+  transition: transform 250ms;
+  display: inline-block;
+}
+a.social:hover {
+  transform: translateY(-2px);
+}
+a.facebook {
+  color: #d6dae6;
+}
+a.instagram {
+  color: #d6dae6;
+}
+a.linkedin {
+  color: #d6dae6;
+}
+a.twitter{
+  color: #d6dae6;
+}
