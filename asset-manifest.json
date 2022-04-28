@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2535caee.chunk.css",
+    "main.js": "/static/js/main.4aaaf58a.chunk.js",
+    "main.js.map": "/static/js/main.4aaaf58a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ac341dc2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ac341dc2.js.map",
+    "static/css/2.9bd9b2e5.chunk.css": "/static/css/2.9bd9b2e5.chunk.css",
+    "static/js/2.3e3077bc.chunk.js": "/static/js/2.3e3077bc.chunk.js",
+    "static/js/2.3e3077bc.chunk.js.map": "/static/js/2.3e3077bc.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.9bd9b2e5.chunk.css.map": "/static/css/2.9bd9b2e5.chunk.css.map",
+    "static/css/main.2535caee.chunk.css.map": "/static/css/main.2535caee.chunk.css.map",
+    "static/js/2.3e3077bc.chunk.js.LICENSE.txt": "/static/js/2.3e3077bc.chunk.js.LICENSE.txt",
+    "static/media/Footer.css": "/static/media/bg-img.ddd9a3e2.png",
+    "static/media/calculator.046a9d0c.svg": "/static/media/calculator.046a9d0c.svg",
+    "static/media/contact.css": "/static/media/contact_banner.add7477f.png",
+    "static/media/phone.379bb862.svg": "/static/media/phone.379bb862.svg",
+    "static/media/playbutton.27caf138.svg": "/static/media/playbutton.27caf138.svg",
+    "static/media/Register.css": "/static/media/welcome-bg.d3a46a43.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ac341dc2.js",
+    "static/css/2.9bd9b2e5.chunk.css",
+    "static/js/2.3e3077bc.chunk.js",
+    "static/css/main.2535caee.chunk.css",
+    "static/js/main.4aaaf58a.chunk.js"
+  ]
+}
