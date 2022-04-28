@@ -8,7 +8,7 @@ import "antd/dist/antd.css";
 export default function App() {
   function MainApp() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <MainRoute />
       </Router>
     );
