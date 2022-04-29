@@ -68,13 +68,14 @@ function Home() {
                 <div className="video-block">
                   <div className="video-wrapper">
                     <div className="video-play-button" id="stepTwo">
-                      <a href="" className="oveflowHidden">
+                      <a className="oveflowHidden">
                         <img src={playbutton} alt="tutorial playbutton" />
                       </a>
+                      <p>Watch tutorials</p>
                     </div>
-                    <div className="video-text">
+                    {/* <div className="video-text">
                       <h5>Watch tutorials</h5>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

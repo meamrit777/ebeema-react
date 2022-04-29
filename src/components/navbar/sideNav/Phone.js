@@ -75,30 +75,32 @@ function Phone() {
   return (
     <>
       <div className="side-nav">
-        <div>
-          <Link to="/calculator">
+        <div className="side-item">
+          <Link className="side-item-wrapper" to="/calculator">
+          <div className="side-icon">
             <img
               src={calculatorIcon}
               className="side-nav-calulator"
-              // style={{
-              //   backgroundColor: "#a13737",
-              //   padding: "10px",
-              //   borderRadius: "5px",
-              // }}
               alt="calculator icon"
-              // className="calculator-icon"
             />
+            </div>
+            <p>calculator</p>
           </Link>
         </div>
 
-        <div>
-          <img
-            src={phoneIcon}
-            alt="phone contact"
-            className="side-nav-phone"
-            // style={{ padding: "10px", borderRadius: "5px" }}
-            onClick={showDrawer}
-          />
+        <div className="side-item">
+          <div className="side-item-wrapper">
+            <div className="side-icon">
+            <img
+              src={phoneIcon}
+              alt="phone contact"
+              className="side-nav-phone"
+              // style={{ padding: "10px", borderRadius: "5px" }}
+              onClick={showDrawer}
+            />
+            </div>
+            <p>Phone</p>
+          </div>
         </div>
       </div>
       {/* <Button type="primary" onClick={showDrawer}>

@@ -41,7 +41,9 @@ function Navbar() {
 
   return (
     <nav className={`navbar ${show && "nav__blue"}`}>
-      <Link to="/">
+      <div className="container">
+          <div className="nav-wrapper">
+          <Link to="/">
         <img className="header-logo" src="./image/logo.png" alt="" />
       </Link>
       <div className="three-bar" onClick={handelClick}>
@@ -124,6 +126,8 @@ function Navbar() {
           </li>
         </ul>
       </div> */}
+          </div>
+      </div>
     </nav>
   );
 }
