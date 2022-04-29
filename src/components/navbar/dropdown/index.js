@@ -1,7 +1,54 @@
 import React, { useState } from "react";
-import { DropItems } from "./DropItems";
 import "./Dropdown.css";
 import { Link } from "react-router-dom";
+
+const DropItems = [
+  {
+    title: "High Return Plans",
+    image: "./image.heart.png",
+    subItems: [
+      {
+        title: "web ",
+      },
+      {
+        title: "web ",
+      },
+    ],
+  },
+  {
+    title: "Saving Plans",
+    image: "./image.heart.png",
+    subItems: [
+      {
+        title: "web ",
+      },
+      {
+        title: "web ",
+      },
+    ],
+  },
+  {
+    title: "Team Insurance Plans",
+    image: "./image.heart.png",
+    subItems: [
+      {
+        title: "web ",
+      },
+      {
+        title: "web",
+      },
+    ],
+  },
+  {
+    title: "General Insurance Plans",
+    image: "./image.heart.png",
+    subItems: [
+      {
+        title: "web ",
+      },
+    ],
+  },
+];
 
 function Dropdown() {
   const [click, setClick] = useState(false);
@@ -11,19 +58,13 @@ function Dropdown() {
   return (
     <>
       <ul
-        onClick={handleClick}
+        // onClick={handleClick}
         className={click ? "dropdown-menu clicked" : "dropdown-menu"}
       >
         {DropItems.map((item, index) => {
           return (
             <li key={index}>
-              <Link
-                className={item.cName}
-                to={item.path}
-                onClick={() => setClick(false)}
-              >
-                {item.title}
-              </Link>
+              <a className="dropdown-link">{item.title}</a>
             </li>
           );
         })}
