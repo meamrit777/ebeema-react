@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const DropItems = [
   {
+    id:1,
     title: "High Return Plans",
     image: "./image.heart.png",
     subItems: [
@@ -16,6 +17,7 @@ const DropItems = [
     ],
   },
   {
+    id:2,
     title: "Saving Plans",
     image: "./image.heart.png",
     subItems: [
@@ -28,6 +30,7 @@ const DropItems = [
     ],
   },
   {
+    id:3,
     title: "Team Insurance Plans",
     image: "./image.heart.png",
     subItems: [
@@ -40,6 +43,7 @@ const DropItems = [
     ],
   },
   {
+    id:4,
     title: "General Insurance Plans",
     image: "./image.heart.png",
     subItems: [
@@ -59,15 +63,21 @@ function Dropdown() {
     <>
       <ul
         // onClick={handleClick}
-        className={click ? "dropdown-menu clicked" : "dropdown-menu"}
+        className={click ? "parent-dropdown clicked" : "parent-dropdown"}
       >
-        {DropItems.map((item, index) => {
-          return (
-            <li key={index}>
-              <a className="dropdown-link">{item.title}</a>
-            </li>
-          );
-        })}
+        <div className="dropdown-main-items">
+          {DropItems.map((item, index) => {
+            return (
+              <li key={index} data-id={item.id} >
+                <a className="dropdown-link">{item.title}</a>
+              </li>
+            );
+          })}
+        </div>
+        <div class="vl"></div>
+        <div className="dropdown-sub-items">
+
+        </div>
       </ul>
     </>
   );
