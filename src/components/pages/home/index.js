@@ -25,9 +25,9 @@ function Home() {
   const showModal = () => {
     setVisible(true);
   };
-  const handleClick = () => {
-    console.log("handle click");
-  };
+  // const handleClick = () => {
+  //   console.log("handle click");
+  // };
   const handleCancel = () => {
     setVisible(false);
   };
@@ -38,6 +38,7 @@ function Home() {
   const handleYoutubeCancel = () => {
     setYoutubeVisible(false);
   };
+
   const items = [
     {
       title: "Term Life Plans",
@@ -76,12 +77,8 @@ function Home() {
                 <div className="video-block">
                   <div className="video-wrapper">
                     <div className="video-play-button" id="stepTwo">
-                      <a className="oveflowHidden">
-                        <img
-                          onClick={showYoutubeModal}
-                          src={playbutton}
-                          alt="tutorial playbutton"
-                        />
+                      <a className="oveflowHidden" onClick={showYoutubeModal}>
+                        <img src={playbutton} alt="tutorial playbutton" />
                       </a>
                       <p>Watch tutorials</p>
                       <Modal

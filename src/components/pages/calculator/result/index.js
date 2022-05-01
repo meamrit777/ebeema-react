@@ -20,7 +20,7 @@ const Result = () => {
       setTerm(location.state.term);
     }
   }, [location]);
-  console.log("location from userInformation = ", location.state.info);
+  // console.log("location from userInformation = ", location.state.info);
 
   return (
     <>
@@ -37,7 +37,7 @@ const Result = () => {
           sum={sum}
           setSum={setSum}
         />
-        {/* <Table /> */}
+        <Table />
         {/* <Test2 /> */}
       </div>
     </>

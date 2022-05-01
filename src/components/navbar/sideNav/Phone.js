@@ -35,6 +35,7 @@ function Phone() {
   };
   const requestButtonHandler = () => {
     if (userFormValues.Name && userFormValues.phoneNo && userFormValues.email) {
+      setVisible(false);
       Swal.fire({
         icon: "success",
         title: "success",
@@ -77,12 +78,12 @@ function Phone() {
       <div className="side-nav">
         <div className="side-item">
           <Link className="side-item-wrapper" to="/calculator">
-          <div className="side-icon">
-            <img
-              src={calculatorIcon}
-              className="side-nav-calulator"
-              alt="calculator icon"
-            />
+            <div className="side-icon">
+              <img
+                src={calculatorIcon}
+                className="side-nav-calulator"
+                alt="calculator icon"
+              />
             </div>
             <p>calculator</p>
           </Link>
@@ -91,21 +92,19 @@ function Phone() {
         <div className="side-item">
           <div className="side-item-wrapper">
             <div className="side-icon">
-            <img
-              src={phoneIcon}
-              alt="phone contact"
-              className="side-nav-phone"
-              // style={{ padding: "10px", borderRadius: "5px" }}
-              onClick={showDrawer}
-            />
+              <img
+                src={phoneIcon}
+                alt="phone contact"
+                className="side-nav-phone"
+                // style={{ padding: "10px", borderRadius: "5px" }}
+                onClick={showDrawer}
+              />
             </div>
             <p>Phone</p>
           </div>
         </div>
       </div>
-      {/* <Button type="primary" onClick={showDrawer}>
-    Open
-  </Button> */}
+
       <Drawer
         className="phone-drawer"
         title="Request Callback"
