@@ -96,6 +96,15 @@ h6 {
   color: #3d538c;
   margin-left: 10px;
 } */
+.ant-modal.youtube-modal .ant-modal-content button.ant-modal-close {
+  display: none;
+}
+.ant-modal.youtube-modal .ant-modal-content .ant-modal-body {
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  width: 520px;
+}
 .select-insurance-type {
   display: block;
   margin-top: 10px;

@@ -9,7 +9,9 @@ import { Carousel, Modal } from "antd";
 import Corporate from "./Corporate";
 
 function Home() {
+  const [youtubeVisible, setYoutubeVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+
   const initialValues = {
     Name: "",
     phoneNo: "",
@@ -29,7 +31,13 @@ function Home() {
   const handleCancel = () => {
     setVisible(false);
   };
+  const showYoutubeModal = () => {
+    setYoutubeVisible(true);
+  };
 
+  const handleYoutubeCancel = () => {
+    setYoutubeVisible(false);
+  };
   const items = [
     {
       title: "Term Life Plans",
@@ -69,13 +77,32 @@ function Home() {
                   <div className="video-wrapper">
                     <div className="video-play-button" id="stepTwo">
                       <a className="oveflowHidden">
-                        <img src={playbutton} alt="tutorial playbutton" />
+                        <img
+                          onClick={showYoutubeModal}
+                          src={playbutton}
+                          alt="tutorial playbutton"
+                        />
                       </a>
                       <p>Watch tutorials</p>
+                      <Modal
+                        className="youtube-modal"
+                        visible={youtubeVisible}
+                        style={{ top: "25%" }}
+                        footer={null}
+                        maskClosable={true}
+                        onCancel={handleYoutubeCancel}
+                      >
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://youtube.com/embed/foFSEi24BpI"
+                          frameborder="0"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                          title="video"
+                        />
+                      </Modal>
                     </div>
-                    {/* <div className="video-text">
-                      <h5>Watch tutorials</h5>
-                    </div> */}
                   </div>
                 </div>
               </div>

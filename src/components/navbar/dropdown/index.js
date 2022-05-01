@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Dropdown.css";
 import { Link } from "react-router-dom";
 
 const DropItems = [
   {
-    id:1,
+    id: 1,
     title: "High Return Plans",
     image: "./image.heart.png",
     subItems: [
@@ -17,7 +17,7 @@ const DropItems = [
     ],
   },
   {
-    id:2,
+    id: 2,
     title: "Saving Plans",
     image: "./image.heart.png",
     subItems: [
@@ -30,7 +30,7 @@ const DropItems = [
     ],
   },
   {
-    id:3,
+    id: 3,
     title: "Team Insurance Plans",
     image: "./image.heart.png",
     subItems: [
@@ -43,7 +43,7 @@ const DropItems = [
     ],
   },
   {
-    id:4,
+    id: 4,
     title: "General Insurance Plans",
     image: "./image.heart.png",
     subItems: [
@@ -59,6 +59,12 @@ function Dropdown() {
 
   const handleClick = () => setClick(!click);
 
+  useEffect(() => {
+    return () => {
+      console.log("first");
+    };
+  }, []);
+
   return (
     <>
       <ul
@@ -68,16 +74,14 @@ function Dropdown() {
         <div className="dropdown-main-items">
           {DropItems.map((item, index) => {
             return (
-              <li key={index} data-id={item.id} >
+              <li key={index} data-id={item.id}>
                 <a className="dropdown-link">{item.title}</a>
               </li>
             );
           })}
         </div>
         <div class="vl"></div>
-        <div className="dropdown-sub-items">
-
-        </div>
+        <div className="dropdown-sub-items"></div>
       </ul>
     </>
   );
