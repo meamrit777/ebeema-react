@@ -17,6 +17,7 @@ import Phone from "./components/navbar/sideNav/Phone";
 import Result from "./components/pages/calculator/result";
 // import Result from "./components/pages/calculator/filter";
 import "antd/dist/antd.css";
+import Confirm from "./components/pages/calculator/result/confirmation/confim";
 
 function MainRoute() {
   return (
@@ -35,6 +36,7 @@ function MainRoute() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/calculator" element={<Calculator />} />
         <Route path="/calculator/result" element={<Result />} />
+        <Route path="/confirm" element={<Confirm />} />
       </Routes>
       <Footer />
       <BackTop />

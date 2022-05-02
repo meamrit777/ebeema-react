@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllResult } from "../../../../redux/result/ResultAction";
 import "./index.css";
+import { Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Table = ({ sum, term, category }) => {
   const [resultData, setResultData] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [planVisible, setPlanVisible] = useState(false);
 
   const results = useSelector((state) => state.allResults.results);
-  console.log("!!!!!", results?.data?.products);
+  console.log("hola", resultData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,9 +20,25 @@ const Table = ({ sum, term, category }) => {
 
   useEffect(() => {
     if (results?.data) {
-      setResultData(results.data.products);
+      setResultData(Object.values(results.data.products));
     }
   }, [results]);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+  const showViewModal = () => {
+    setPlanVisible(true);
+  };
+
+  const handleViewCancel = () => {
+    setPlanVisible(false);
+  };
+
   return (
     <div className="">
       <div className="compare-header-info">
@@ -44,80 +64,103 @@ const Table = ({ sum, term, category }) => {
         <div className="right-sort"></div>
       </div>
       <div className="compare-plans">
+        {resultData.map((data, index) => (
+          <>
+            <table class="table compare-result-table">
+              <tbody>
+                <tr className="content-compare">
+                  <td className="compare-parts line-rht-cmp">
+                    <p className="content-plan" style={{ fontSize: 12 }}>
+                      {data.company.name}
+                    </p>
+                    <img
+                      src={`http://ispl.ebeema.com/images/company/${data.company.logo}`}
+                      alt="company logo"
+                      width="50%"
+                    />
+                    <p className="prod-name">{data.name}</p>
+                  </td>
 
-        {Object.keys(resultData)?.map((data, index) => (
-          <>{data.id}</>
+                  <td className="details-box line-rht-cmp">
+                    <p style={{ fontSize: 12 }}>Premium Amount</p>
+                    <strong>RS.{data.premiumAmount}</strong>
+                    <p>Age</p>
+                    <a onClick={showModal}>Payment Schedule</a>
+                    <Modal
+                      className="user-modal"
+                      visible={visible}
+                      // style={{  }}
+                      title="Payback Schedule"
+                      footer={null}
+                      maskClosable={true}
+                      onCancel={handleCancel}
+                    >
+                      <p>sagun dost</p>
+                    </Modal>
+                  </td>
+                  <td className="prem-box line-rht-cmp">
+                    <p style={{ fontSize: 12 }}>Estimated Maturity Value</p>
+                    <strong>RS.{data.totalPremiumAmount}</strong>
+                  </td>
 
+                  <td class="benefit-box line-rht-cmp">
+                    <div className="pay-term">
+                      <p
+                        style={{ border: "1px solid #ddd", padding: "2px 4px" }}
+                      >
+                        <strong>Term: </strong>
+                        {term} Y
+                      </p>
+                      <p
+                        style={{ border: "1px solid #ddd", padding: "2px 4px" }}
+                      >
+                        <strong> Pay Term: </strong>Y
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="select-plan-box">
+                      <button className="view-plan" onClick={showViewModal}>
+                        View Plan
+                      </button>
+                      <Modal
+                        className=""
+                        visible={planVisible}
+                        // style={{ top: "5%" }}
+                        title="View Plan"
+                        footer={null}
+                        maskClosable={true}
+                        onCancel={handleViewCancel}
+                      >
+                        <div class="view-plan-content-wrapper">
+                          <div class="invoice-header-wrapper">
+                            <div class="web-logo">
+                              <img src="https://ebeema.com/frontend/img/logo.png" />
+                            </div>
+                            <div class="company-invoice-wrapper">
+                              <div class="invoice-company-logo">
+                                <img src="https://ebeema.com/images/company/1636956440_jpeg" />
+                              </div>
+                              <div class="invoice-company-name">
+                                <p>
+                                  NLIC Nepal Life Insurance
+                                  Company&nbsp;&nbsp;&nbsp;(Jeevan Jyoti)
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          {data.benefit_details}
+                        </div>
+                      </Modal>
+                      <br />
+                      <button className="select-plan">Select Plan</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </>
         ))}
-        <table class="table compare-result-table">
-          <tbody>
-            <tr className="content-compare">
-              <td className="compare-parts line-rht-cmp">
-                <p className="content-plan"></p>
-                <img />
-                <p className="prod-name"></p>
-              </td>
-
-              <td className="details-box line-rht-cmp">
-                <span className="gap-0"></span>
-                <p className="sum-title"></p>
-                <p className="prem-val val-amount"></p>
-                <span className="gap-0"></span>
-                <p className="details-title2"></p>
-                <p className="details-val2 val-amount"></p>
-                <p className="details-title2 mb-block"></p>
-
-                <p details-val2 val-amount></p>
-              </td>
-              <td className="prem-box line-rht-cmp">
-                <span className="gap-0"></span>
-                <p className="details-title2"></p>
-
-                <p details-val2 val-amount></p>
-              </td>
-              <td className="mb-benefits">
-                <div className="benefits-button">
-                  <p>
-                    <span></span> <i className="fa fa-chevron-down"></i>
-                  </p>
-                </div>
-              </td>
-              <td class="benefit-box line-rht-cmp">
-                <ul class="term-details mb-none-block ">
-                  <li>
-                    <strong>Term :</strong>&nbsp;<span>20 Y</span>
-                  </li>
-                  <li>
-                    <strong>Pay Term :</strong>&nbsp;<span>16 Y</span>
-                  </li>
-                </ul>
-                <ul class="benefit-lists features">
-                  <li class="text-primary text-capitalize">
-                    <p class="result-feature">
-                      <span>ADB</span>
-
-                      <i
-                        class="fa fa-times to-right cross-fa"
-                        aria-hidden="true"
-                      ></i>
-                    </p>
-                  </li>
-
-                  <li class="text-primary text-capitalize">
-                    <p class="result-feature">
-                      <span>PWB</span>
-
-                      <i
-                        class="fa fa-times to-right cross-fa"
-                        aria-hidden="true"
-                      ></i>
-                    </p>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   );

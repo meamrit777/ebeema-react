@@ -37,7 +37,7 @@ const Result = () => {
           sum={sum}
           setSum={setSum}
         />
-        <Table />
+        <Table sum={sum} term={term} category={category} />
         {/* <Test2 /> */}
       </div>
     </>

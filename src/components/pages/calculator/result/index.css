@@ -211,6 +211,70 @@ td,
 th {
   padding: 0;
 }
+.pay-term {
+  margin: 0;
+  font-size: 12px;
+  display: flex;
+  float: right;
+  color: #3a6da7;
+}
+.select-plan-box {
+  /* display: flex;
+  flex-direction: column; */
+  text-align: center;
+  padding: 10% 0;
+}
+.view-plan {
+  background: #3d538c;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+.select-plan {
+  background: #ec3e26;
+  color: #ffff;
+  padding: 11px 28px;
+  border: 0;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+}
+.select-plan:hover {
+  background: #126afb;
+}
+.web-logo {
+  display: flex;
+  justify-content: center;
+}
+.web-logo img {
+  width: 35%;
+}
+.company-invoice-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.invoice-company-logo {
+  width: 30%;
+}
+.invoice-company-logo img {
+  width: 100%;
+}
+.invoice-company-name p {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0 15px;
+  color: #333;
+  line-height: 18px;
+}
 /* @media screen and (max-width: 1133px) {
   .filter-split {
     padding: 0;
