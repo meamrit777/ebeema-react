@@ -10,6 +10,8 @@ const Table = ({ sum, term, category }) => {
   const [visible, setVisible] = useState(false);
   const [planVisible, setPlanVisible] = useState(false);
 
+  const navigate = useNavigate();
+
   const results = useSelector((state) => state.allResults.results);
   console.log("hola", resultData);
   const dispatch = useDispatch();
@@ -38,7 +40,15 @@ const Table = ({ sum, term, category }) => {
   const handleViewCancel = () => {
     setPlanVisible(false);
   };
-
+  const validityCheck = () => {
+    if (sum) {
+      navigate("/confirm", {
+        state: { sum, term, category },
+      });
+    } else {
+      console.log("error");
+    }
+  };
   return (
     <div className="">
       <div className="compare-header-info">

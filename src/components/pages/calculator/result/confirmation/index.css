@@ -1,0 +1,21 @@
+.confirm-container {
+  margin: 30px 60px;
+}
+.real-step {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.real-step-wrapper {
+  width: 85%;
+}
+.steps-content {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+.step-wrapper {
+  width: 45%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+}

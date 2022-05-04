@@ -17,7 +17,7 @@ import Phone from "./components/navbar/sideNav/Phone";
 import Result from "./components/pages/calculator/result";
 // import Result from "./components/pages/calculator/filter";
 import "antd/dist/antd.css";
-import Confirm from "./components/pages/calculator/result/confirmation/confim";
+import Confirm from "./components/pages/calculator/result/confirmation";
 
 function MainRoute() {
   return (

@@ -551,6 +551,7 @@ const Calculator = () => {
             <Input
               value={age}
               placeholder="0"
+              // onChange={handleChange}
               style={{
                 height: 45,
                 width: 110,
