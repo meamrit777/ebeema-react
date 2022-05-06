@@ -56,15 +56,17 @@ const DropItems = [
 
 function Dropdown() {
   const [click, setClick] = useState(false);
-
+  const [subMenuId,setSubMenuId]=useState(1)
+  const [subMenu,setSubMenu]=useState([])
   const handleClick = () => setClick(!click);
 
   useEffect(() => {
-    return () => {
-      console.log("first");
-    };
-  }, []);
-
+    DropItems.filter(item => item.id == subMenuId).map((value,key)=>{
+      value.subItems && value.subItems.map((subValue,key)=>{
+        subMenu.push(subValue.title)
+      })
+    })
+  },[subMenuId]);
   return (
     <>
       <ul

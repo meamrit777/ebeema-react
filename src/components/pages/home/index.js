@@ -109,8 +109,10 @@ function Home() {
                   method="get"
                   action="#"
                 >
-                  <select className="insurance-lists">
-                    <option value="" selected="selected">
+                  <select className="insurance-lists" onChange={(e)=>{
+                      localStorage.setItem('category',e.target.value)
+                    }}>
+                    <option value="" selected="selected" >
                       Select a insurance type
                     </option>
                     <option value="endowment">Endowment/Investment</option>

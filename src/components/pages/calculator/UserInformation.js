@@ -19,7 +19,6 @@ const UserInformation = ({
   const { Option } = Select;
   const [form] = Form.useForm();
   const [province, setProvince] = useState("");
-
   const handleChange = (e) => {
     // console.log(e.target);
     const { name, value } = e.target;

@@ -1,46 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllResult } from "../../../../redux/result/ResultAction";
-import "./index.css";
-import { Modal } from "antd";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
+import { Modal, Tooltip } from "antd";
 
 const Table = ({ sum, term, category }) => {
-  const [resultData, setResultData] = useState([]);
-  const [visible, setVisible] = useState(false);
-  const [planVisible, setPlanVisible] = useState(false);
+  const results = useSelector((state) => state.allResults.results);
+  // console.log("results", results);
+  const dispatch = useDispatch();
+
+  const [resultcontent, setResultContent] = useState([]);
+  const [viewplan, setViewPlan] = useState(false);
+  const [modalData, setModalData] = useState();
+  const [showviewModal, setViewShowModal] = useState(false);
+  const [showfaicon, setShowFaIcon] = useState(true);
 
   const navigate = useNavigate();
 
-  const results = useSelector((state) => state.allResults.results);
-  console.log("hola", resultData);
-  const dispatch = useDispatch();
+  const toggleIcon = () => {
+    setShowFaIcon(!showfaicon);
+  };
+
+  useEffect(() => {
+    if (results?.data) {
+      setResultContent(Object.values(results.data.products));
+    }
+  }, [results]);
+  useEffect(() => {
+    setModalData(resultcontent);
+  }, [resultcontent]);
+  console.log("resultcontent", resultcontent);
 
   useEffect(() => {
     dispatch(fetchAllResult());
   }, []);
 
-  useEffect(() => {
-    if (results?.data) {
-      setResultData(Object.values(results.data.products));
-    }
-  }, [results]);
-
-  const showModal = () => {
-    setVisible(true);
+  const showViewPlan = () => {
+    setViewPlan(true);
   };
-
-  const handleCancel = () => {
-    setVisible(false);
+  const handleViewPlan = () => {
+    setViewPlan(false);
   };
   const showViewModal = () => {
-    setPlanVisible(true);
+    setViewShowModal(true);
   };
+  console.log("modalDAta", modalData);
 
-  const handleViewCancel = () => {
-    setPlanVisible(false);
-  };
-  const validityCheck = () => {
+  const confirmation = () => {
     if (sum) {
       navigate("/confirm", {
         state: { sum, term, category },
@@ -74,8 +81,8 @@ const Table = ({ sum, term, category }) => {
         <div className="right-sort"></div>
       </div>
       <div className="compare-plans">
-        {resultData.map((data, index) => (
-          <>
+        {resultcontent.map((data, index) => (
+          <div>
             <table class="table compare-result-table">
               <tbody>
                 <tr className="content-compare">
@@ -85,92 +92,143 @@ const Table = ({ sum, term, category }) => {
                     </p>
                     <img
                       src={`http://ispl.ebeema.com/images/company/${data.company.logo}`}
-                      alt="company logo"
                       width="50%"
                     />
                     <p className="prod-name">{data.name}</p>
                   </td>
 
                   <td className="details-box line-rht-cmp">
-                    <p style={{ fontSize: 12 }}>Premium Amount</p>
-                    <strong>RS.{data.premiumAmount}</strong>
-                    <p>Age</p>
-                    <a onClick={showModal}>Payment Schedule</a>
-                    <Modal
-                      className="user-modal"
-                      visible={visible}
-                      // style={{  }}
-                      title="Payback Schedule"
-                      footer={null}
-                      maskClosable={true}
-                      onCancel={handleCancel}
-                    >
-                      <p>sagun dost</p>
-                    </Modal>
+                    <span style={{ color: "#616161", fontSize: "13px" }}>
+                      Premium Amount
+                    </span>
+                    <p style={{ paddingTop: "5px" }}>
+                      <strong>Rs.{data.premiumAmount}</strong>
+                    </p>
+                    <p style={{ color: "#616161" }}>Age</p>
+                    <p>
+                      <strong>{data.currentAge}Y</strong>
+                    </p>
+
+                    <span style={{ color: " #337ab7" }}>
+                      Payment Schedule
+                      {/* <i
+                        class="fa fa-info-circle"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Payment Schedule"
+                        style={{ color: "#777" }}
+                      ></i> */}
+                    </span>
                   </td>
                   <td className="prem-box line-rht-cmp">
-                    <p style={{ fontSize: 12 }}>Estimated Maturity Value</p>
-                    <strong>RS.{data.totalPremiumAmount}</strong>
+                    <span style={{ color: "#616161", fontSize: "13px" }}>
+                      Estimated Maturity value
+                    </span>
+                    <p style={{ paddingTop: "5px" }}>
+                      <strong>Rs.{data.totalPremiumAmount}</strong>
+                    </p>
                   </td>
-
-                  <td class="benefit-box line-rht-cmp">
+                  <td className="prem-box line-rht-cmp">
                     <div className="pay-term">
                       <p
                         style={{ border: "1px solid #ddd", padding: "2px 4px" }}
                       >
                         <strong>Term: </strong>
-                        {term} Y
+                        {data.currentTerm} Y
                       </p>
                       <p
                         style={{ border: "1px solid #ddd", padding: "2px 4px" }}
                       >
-                        <strong> Pay Term: </strong>Y
+                        <strong>Pay Term: </strong>
+                        {data.payingTerm} Y
                       </p>
                     </div>
+                    <p className="benefit-lists">
+                      {data.availableFeatures.map((word) => (
+                        <div>
+                          <p className="availablefeatures-name">
+                            <span>{word.name}</span>
+                            <a onClick={toggleIcon}>
+                              {showfaicon ? (
+                                <i
+                                  class="fa fa-times to-right cross-fa"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <i
+                                  class="fa fa-check-circle"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </a>
+                          </p>
+                        </div>
+                      ))}
+                    </p>
                   </td>
+
                   <td>
                     <div className="select-plan-box">
-                      <button className="view-plan" onClick={showViewModal}>
+                      <button
+                        className="view-plan"
+                        // className="select-plan"
+                        onClick={() => {
+                          setModalData(data);
+                          console.log("data", data);
+                          showViewPlan();
+                        }}
+                      >
                         View Plan
                       </button>
-                      <Modal
-                        className=""
-                        visible={planVisible}
-                        // style={{ top: "5%" }}
-                        title="View Plan"
-                        footer={null}
-                        maskClosable={true}
-                        onCancel={handleViewCancel}
-                      >
-                        <div class="view-plan-content-wrapper">
-                          <div class="invoice-header-wrapper">
-                            <div class="web-logo">
-                              <img src="https://ebeema.com/frontend/img/logo.png" />
-                            </div>
-                            <div class="company-invoice-wrapper">
-                              <div class="invoice-company-logo">
-                                <img src="https://ebeema.com/images/company/1636956440_jpeg" />
-                              </div>
-                              <div class="invoice-company-name">
-                                <p>
-                                  NLIC Nepal Life Insurance
-                                  Company&nbsp;&nbsp;&nbsp;(Jeevan Jyoti)
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          {data.benefit_details}
-                        </div>
-                      </Modal>
+
                       <br />
-                      <button className="select-plan">Select Plan</button>
+
+                      <button
+                        className="select-plan"
+                        onClick={() => {
+                          confirmation();
+                        }}
+                      >
+                        Select Plan
+                      </button>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-          </>
+          </div>
         ))}
+        <Modal
+          className="user-modal"
+          visible={viewplan}
+          title="View Plan"
+          style={{ top: "1%" }}
+          footer={null}
+          maskClosable={false}
+          onCancel={handleViewPlan}
+        >
+          <div>
+            <div className="modal-viewplan">
+              <img className="modal-logo" src="./image/logo.png" alt="" />
+            </div>
+            <div className="company-invoice-wrapper">
+              <div style={{ width: "35%" }}>
+                <img
+                  src={`http://ispl.ebeema.com/images/company/${modalData?.company?.logo}`}
+                  width="100%"
+                />
+              </div>
+              <div className="invoice-company-name">
+                <p className="invoice-companyy-title">
+                  {modalData?.company?.name} ({modalData?.name})
+                </p>
+              </div>
+            </div>
+            <p
+              dangerouslySetInnerHTML={{ __html: modalData?.benefit_details }} //to remove html tag from api
+            ></p>
+          </div>
+        </Modal>
       </div>
     </div>
   );

@@ -58,42 +58,43 @@ const Confirm = () => {
             <div className="step-wrapper">
               <div>
                 <Form form={form} name="userInfo" size="large">
+                  <h3>Selected Product:</h3>
                   <Form.Item>
-                    <label>Name</label>
+                    <label>Name:</label>
                     <br />
                     <Input
                       type="text"
                       name="Name"
                       // onChange={handleChange}
                       // value={Name}
-                      placeholder="Enter your full name"
-                      style={{ width: 300, height: 40 }}
+                      placeholder="Name"
+                      style={{ width: "100%", height: 40 }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Term</label>
+                    <label>Term:</label>
                     <br />
                     <Input
                       type="text"
                       name="term"
-                      style={{ width: 300, height: 40 }}
+                      style={{ width: "100%", height: 40 }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Sum Assured</label>
+                    <label>Sum Assured:</label>
                     <br />
                     <Input
                       type="text"
                       name="sum"
-                      style={{ width: 300, height: 40 }}
+                      style={{ width: "100%", height: 40 }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Mode of Payment</label>
+                    <label>Mode of Payment:</label>
                     <br />
                   </Form.Item>
                   <Form.Item>
-                    <label>Benefit</label>
+                    <label>Benefit:</label>
                   </Form.Item>
                 </Form>
               </div>

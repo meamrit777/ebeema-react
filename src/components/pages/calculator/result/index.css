@@ -37,7 +37,19 @@ span.ant-checkbox-inner {
   background: #fafafa;
   padding: 20px 30px;
 }
-
+form#filter .ant-row.ant-form-item {
+  padding: 12px 20px 0px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0 !important;
+}
+.ant-picker.ant-picker-small.filerDatePicker {
+  width: 100px;
+}
+.ant-select.dropdown-filter.ant-select-single.ant-select-show-arrow
+  .ant-select-selector {
+  border: none !important;
+  outline: red !important;
+}
 .filter-split {
   display: flex;
   flex-direction: row;
@@ -225,6 +237,7 @@ th {
   padding: 10% 0;
 }
 .view-plan {
+  border: none;
   background: #3d538c;
   color: #fff;
   padding: 6px 20px;
@@ -232,7 +245,6 @@ th {
   display: inline-block;
   margin-bottom: 20px;
   font-size: 14px;
-  border: none;
   cursor: pointer;
 }
 .select-plan {

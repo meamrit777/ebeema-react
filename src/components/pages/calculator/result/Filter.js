@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Form,
   Input,
@@ -10,6 +11,7 @@ import {
   Tooltip,
 } from "antd";
 import moment from "moment";
+import { fetchAllResult } from "../../../../redux/result/ResultAction";
 // import SelectInput from "@material-ui/core/Select/SelectInput";
 import "./index.css";
 
@@ -17,10 +19,28 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
   const [form] = Form.useForm();
   const { Option } = Select;
 
-  // function onChange(e) {
-  //   console.log(`checked = ${e.target.checked}`);
-  // }
+  const results = useSelector((state) => state.allResults.results);
+  const dispatch = useDispatch();
 
+  const [filterContent, setFilterContent] = useState([]);
+  const [termOption, setTermOption] = useState([]);
+  const [uniqueCompany, setUniqueCompany] = useState([]);
+  const [uniqueFeature, setUniqueFeature] = useState([]);
+  const [modeOfPayment, setModeOfPayment] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchAllResult());
+  }, []);
+
+  useEffect(() => {
+    if (results?.data) {
+      setFilterContent(Object.values(results.data));
+      setTermOption(results.data.terms);
+      setUniqueCompany(results.data.companies);
+      setUniqueFeature(results.data.features);
+      setModeOfPayment(results.data.mops);
+    }
+  }, [results]);
   function onChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
     const calAge = moment().diff(userDOB, "years");
@@ -33,45 +53,97 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
   useEffect(() => {
     onChange();
   }, []);
+
   return (
     <div>
-      <Form form={form} name="calc_modal" size="small" className="filter-form">
+      <Form form={form} name="filter" size="default" className="filter-form">
         <Form.Item>
           <h1>Policy filter</h1>
         </Form.Item>
 
         <Form.Item>
+          <p>
+            <b>Date of birth</b>
+          </p>
           <DatePicker
+            placeholder="Select Date of Birth"
             disabledDate={disabledDate}
             onChange={onChange}
-            style={{ height: 45, width: 222 }}
+            style={{ height: 40, width: "100%" }}
           />
-          <Input
-            value={age}
+
+          <input
+            type="text"
             style={{
-              height: 45,
-              width: 110,
-              marginLeft: 20,
+              width: "100%",
+              height: 40,
+              border: "none",
+              outline: "none",
+              paddingLeft: 10,
+            }}
+            value={age}
+            readonly=""
+          />
+          {/* <input style={{ border: "none", outline: "none" }} readonly /> */}
+          {/* {age} */}
+        </Form.Item>
+
+        <Form.Item>
+          <b>Terms</b>
+          <br />
+          <br />
+          <Select
+            className="dropdown-filter"
+            placeholder="Select a term"
+            // style={{ width: "100%" }}
+            value={term}
+            onChange={(value) => {
+              setTerm(value);
+            }}
+          >
+            {termOption?.map((data, index) => (
+              <Option key={data}>{data}</Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item>
+          <p>
+            <b>Sum Assured</b>
+          </p>
+          <input
+            type="text"
+            style={{
+              width: "100%",
+              height: 40,
+              border: "none",
+              outline: "none",
+              paddingLeft: 10,
+            }}
+            value={sum}
+            onChange={(e) => {
+              // handleTerm(e);
+              console.log(":::", e.target.value);
+              setSum(e.target.value);
             }}
           />
         </Form.Item>
 
-        <Form.Item>term</Form.Item>
-
-        <Form.Item>sum Assured</Form.Item>
-
         <Form.Item>
+          <p>
+            <b>Mode of Payment</b>
+          </p>
           <Select
-            className="dropdown-category"
+            className="dropdown-filter"
             placeholder="Select A Mop"
-            // onChange={(value) => {
+            // onChange={(value, index) => {
             //   handleChangeCategory(value, index);
+            //   onChange();
             // }}
           >
-            <Option>Yearly</Option>
-            <Option>Half Yearly</Option>
-            <Option>Quarterly</Option>
-            <Option>Monthly</Option>
+            {modeOfPayment?.map((data, index) => (
+              <Option key={index}>{data}</Option>
+            ))}
           </Select>
         </Form.Item>
 
@@ -126,16 +198,6 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
             asfdsfdsf
           </Checkbox>
         </Form.Item>
-
-        {/* <Form.Item
-          name="note"
-          label="Note"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        ></Form.Item> */}
       </Form>
     </div>
   );

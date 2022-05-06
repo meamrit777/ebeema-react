@@ -52,7 +52,10 @@ const Calculator = () => {
   const products = useSelector((state) => state.allProducts.products);
 
   const tooltipStyle = { marginLeft: 5, color: "#888", fontSize: "1em" };
-
+  useEffect(()=>{
+    setInfo(localStorage.getItem('category'))
+  },[])
+  console.log('dd',localStorage.getItem('category'))
   useEffect(() => {
     if (products?.data) {
       setdataProducts(products?.data?.catagories);
@@ -85,7 +88,6 @@ const Calculator = () => {
   function onChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
     const calAge = moment().diff(userDOB, "years");
-
     const desc = () => {
       switch (info) {
         case "endowment":
@@ -335,7 +337,7 @@ const Calculator = () => {
 
             <div className="select-category">
               <div>
-                <Select
+                <select
                   className="dropdown-category"
                   placeholder="Select Category"
                   onChange={(value, index) => {
@@ -344,7 +346,7 @@ const Calculator = () => {
                   }}
                 >
                   {dataProducts?.map((data, index) => (
-                    <Option
+                    <option
                       key={index}
                       value={data.category_code}
                       min_age={data.min_age}
@@ -353,11 +355,13 @@ const Calculator = () => {
                       proposer_age_range={data.proposer_age_range}
                       husband_age_range={data.husband_age_range}
                       wife_age_range={data.wife_age_range}
+                      selected={data.category_code === info ? true :false}
                     >
                       {data.name}
-                    </Option>
+                      
+                    </option>
                   ))}
-                </Select>
+                </select>
               </div>
               {/* <div>{msg}</div> */}
               <div className="category_info">
