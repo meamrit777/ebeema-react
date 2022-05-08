@@ -93,12 +93,13 @@ span.ant-checkbox-inner {
   width: 95%;
 }
 .policy-filter {
-  border: 1px solid #e0e0e0;
-  font-size: 14px;
-  color: #3a6da7;
+  font-size: 14px !important;
+  color: #3a6da7 !important;
   font-family: Karla, sans-serif;
   background: #f0f0f0;
-  padding: 18px 15px;
+}
+.policy-filter p {
+  margin: 0 !important;
 }
 .compare-list {
   padding: 10px 15px;
@@ -134,11 +135,13 @@ span.ant-checkbox-inner {
   padding: 0 10px;
   height: 100%;
 }
+
 .sumassured-number-wrapper p {
   font-style: normal;
   font-weight: 700;
   font-size: 46px;
   line-height: 47px;
+  letter-spacing: 15px;
   text-align: center;
   color: rgba(5, 12, 69, 0.8);
   margin-bottom: 0;

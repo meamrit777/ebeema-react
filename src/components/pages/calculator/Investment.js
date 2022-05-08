@@ -26,7 +26,12 @@ export const Investment = ({
       console.log("result", result);
     }
   }
-
+  function handleInvestment(e) {
+    // const lastSum = e.target.value;
+    const lastSum = (term * e.target.value).toFixed(2);
+    console.log("sum", lastSum, term);
+    setSum(lastSum);
+  }
   return (
     <>
       <Form.Item>
@@ -107,11 +112,17 @@ export const Investment = ({
               OR
             </Title>
             <Input
+              type="number"
               style={{ marginBottom: 20 }}
               placeholder="Enter Your Term"
               className="input_sum"
               value={term}
               required
+              onChange={(e) => {
+                // handleTerm(e);
+                console.log(":::", e.target.value);
+                setTerm(e.target.value);
+              }}
             />
           </Space>
         </Radio.Group>
@@ -184,11 +195,17 @@ export const Investment = ({
               </Radio.Button>
               <Title level={5}>OR</Title>
               <Input
+                type="number"
                 placeholder="Enter your Sum Assured"
                 className="input_sum"
                 value={sum}
                 required
                 style={{ marginBottom: 20 }}
+                onChange={(e) => {
+                  // handleTerm(e);
+                  console.log(":::", e.target.value);
+                  setSum(e.target.value);
+                }}
               />
             </Space>
           </Radio.Group>
@@ -203,10 +220,16 @@ export const Investment = ({
         </label>
         <br />
         <Input
+          type="number"
           placeholder="Enter your Investment"
           style={{ width: 250, height: 50 }}
           value={investment}
           required
+          onChange={(e) => {
+            handleInvestment(e);
+            console.log(":::", e.target.value);
+            setInvestment(e.target.value);
+          }}
         />
       </Form.Item>
     </>

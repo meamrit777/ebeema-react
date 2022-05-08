@@ -19,3 +19,7 @@
   box-shadow: 0 0 4px rgb(0 0 0 / 20%);
   border-radius: 10px;
 }
+.confim-button {
+  width: 40% !important;
+  float: right;
+}

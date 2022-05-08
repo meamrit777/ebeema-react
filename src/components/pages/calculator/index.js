@@ -24,6 +24,7 @@ import UserInformation from "./UserInformation";
 const Calculator = () => {
   const [info, setInfo] = useState("");
   const [age, setAge] = useState("");
+  console.log("agww", age);
   const [term, setTerm] = useState("");
   const [sum, setSum] = useState("");
   const [investment, setInvestment] = useState("");
@@ -52,10 +53,10 @@ const Calculator = () => {
   const products = useSelector((state) => state.allProducts.products);
 
   const tooltipStyle = { marginLeft: 5, color: "#888", fontSize: "1em" };
-  useEffect(()=>{
-    setInfo(localStorage.getItem('category'))
-  },[])
-  console.log('dd',localStorage.getItem('category'))
+  useEffect(() => {
+    setInfo(localStorage.getItem("category"));
+  }, []);
+  console.log("dd", localStorage.getItem("category"));
   useEffect(() => {
     if (products?.data) {
       setdataProducts(products?.data?.catagories);
@@ -88,6 +89,7 @@ const Calculator = () => {
   function onChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
     const calAge = moment().diff(userDOB, "years");
+    console.log("agee", calAge);
     const desc = () => {
       switch (info) {
         case "endowment":
@@ -291,11 +293,11 @@ const Calculator = () => {
     }
   }
   const handleChangeCategory = (value, index) => {
-    console.log("7777", index.max_age, index.min_age);
+    // console.log("7777", index.max_age, index.min_age);
     setInfo(value);
     setMinAge(index.min_age);
     setMaxAge(index.max_age);
-    setWarnText("");
+    // setWarnText("");
   };
   const showModal = () => {
     setVisible(true);
@@ -337,7 +339,7 @@ const Calculator = () => {
 
             <div className="select-category">
               <div>
-                <select
+                <Select
                   className="dropdown-category"
                   placeholder="Select Category"
                   onChange={(value, index) => {
@@ -355,13 +357,12 @@ const Calculator = () => {
                       proposer_age_range={data.proposer_age_range}
                       husband_age_range={data.husband_age_range}
                       wife_age_range={data.wife_age_range}
-                      selected={data.category_code === info ? true :false}
+                      selected={data.category_code === info ? true : false}
                     >
                       {data.name}
-                      
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               {/* <div>{msg}</div> */}
               <div className="category_info">
@@ -563,7 +564,7 @@ const Calculator = () => {
                 boxShadow:
                   age < minAge || age > maxAge
                     ? "rgb(255 0 0) 3px 2px 13px"
-                    : "",
+                    : "0",
               }}
             />
           </Form.Item>

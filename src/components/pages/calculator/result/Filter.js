@@ -57,8 +57,8 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
   return (
     <div>
       <Form form={form} name="filter" size="default" className="filter-form">
-        <Form.Item>
-          <h1>Policy filter</h1>
+        <Form.Item className="policy-filter">
+          <p>Policy filter</p>
         </Form.Item>
 
         <Form.Item>
