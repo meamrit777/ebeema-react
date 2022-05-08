@@ -23,3 +23,26 @@
   width: 40% !important;
   float: right;
 }
+.title-compayent {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+}
+.step-title {
+  /* background: #fafafa; */
+  width: 100%;
+  text-align: center;
+  padding: 15px 25px;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #3d538c;
+}
+.payment-confirmation-button {
+  display: flex;
+  justify-content: center;
+}
+
+.last-step {
+  box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+}
