@@ -11,7 +11,7 @@ import {
   notification,
   Tooltip,
 } from "antd";
-import "./Calculator.css";
+import "./calculator.css";
 import moment from "moment";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { Investment } from "./Investment";
@@ -23,7 +23,7 @@ import UserInformation from "./UserInformation";
 
 const Calculator = () => {
   const [info, setInfo] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
   console.log("agww", age);
   const [term, setTerm] = useState("");
   const [sum, setSum] = useState("");
@@ -53,9 +53,9 @@ const Calculator = () => {
   const products = useSelector((state) => state.allProducts.products);
 
   const tooltipStyle = { marginLeft: 5, color: "#888", fontSize: "1em" };
-  useEffect(() => {
-    setInfo(localStorage.getItem("category"));
-  }, []);
+  // useEffect(() => {
+  //   setInfo(localStorage.getItem("category"));
+  // }, []);
   console.log("dd", localStorage.getItem("category"));
   useEffect(() => {
     if (products?.data) {
@@ -318,7 +318,7 @@ const Calculator = () => {
   const handleCancel = () => {
     setVisible(false);
   };
-
+  console.log("select", info);
   return (
     <div className="compare__calclulator">
       <Form
@@ -327,10 +327,10 @@ const Calculator = () => {
         size="large"
         onSubmit={onSubmitHandler}
       >
-        <Form.Item>
+        <Form.Item className="hello">
           <div className="category_section">
             <label className="label-title">
-              Categories
+              Category
               <Tooltip placement="top" title="Select your category">
                 <BsFillInfoCircleFill style={tooltipStyle} />
               </Tooltip>
@@ -357,7 +357,7 @@ const Calculator = () => {
                       proposer_age_range={data.proposer_age_range}
                       husband_age_range={data.husband_age_range}
                       wife_age_range={data.wife_age_range}
-                      selected={data.category_code === info ? true : false}
+                      // selected={data.category_code === info ? true : false}
                     >
                       {data.name}
                     </option>
@@ -555,7 +555,7 @@ const Calculator = () => {
             />
             <Input
               value={age}
-              placeholder="0"
+              // placeholder="0"
               // onChange={handleChange}
               style={{
                 height: 45,

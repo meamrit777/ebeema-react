@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Calculator.css";
+import "./calculator.css";
 
 import { Form, Input, Radio, Space, Tooltip } from "antd";
 import { BsFillInfoCircleFill } from "react-icons/bs";
@@ -43,9 +43,14 @@ export const Investment = ({
         </label>
         <br />
 
-        <Radio.Group buttonStyle="solid" size="large">
+        <Radio.Group
+          className="term-radio-group"
+          buttonStyle="solid"
+          size="large"
+        >
           <Space>
             <Radio.Button
+              className="term-box"
               value="1"
               onClick={() => {
                 setTerm("5");
@@ -55,6 +60,7 @@ export const Investment = ({
               5
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="2"
               onClick={() => {
                 setTerm("10");
@@ -64,6 +70,7 @@ export const Investment = ({
               10
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="3"
               onClick={() => {
                 setTerm("15");
@@ -73,6 +80,7 @@ export const Investment = ({
               15
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="4"
               onClick={() => {
                 setTerm("20");
@@ -82,6 +90,7 @@ export const Investment = ({
               20
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="5"
               onClick={() => {
                 setTerm("25");
@@ -91,6 +100,7 @@ export const Investment = ({
               25
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="6"
               onClick={() => {
                 setTerm("30");
@@ -100,6 +110,7 @@ export const Investment = ({
               30
             </Radio.Button>
             <Radio.Button
+              className="term-box"
               value="7"
               onClick={() => {
                 setTerm("35");
@@ -113,9 +124,9 @@ export const Investment = ({
             </Title>
             <Input
               type="number"
-              style={{ marginBottom: 20 }}
               placeholder="Enter Your Term"
               className="input_sum"
+              style={{ fontFamily: "Inter" }}
               value={term}
               required
               onChange={(e) => {
@@ -127,7 +138,7 @@ export const Investment = ({
           </Space>
         </Radio.Group>
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="sum-box">
         <label className="label-title">
           Sum Assured
           <Tooltip placement="top" title="select your investment">
@@ -136,62 +147,71 @@ export const Investment = ({
         </label>
         <br />
         <Form.Item>
-          <Radio.Group buttonStyle="solid" size="large">
+          <Radio.Group
+            className="sum-radio-group"
+            buttonStyle="solid"
+            size="large"
+          >
             <Space>
               <Radio.Button
-                className="radio_button"
+                className="sum-box"
                 value="a"
                 onClick={() => {
                   setSum("500000");
                   DivideNumber(term, sum);
                 }}
               >
-                5Lakhs
+                5 Lakhs
               </Radio.Button>
               <Radio.Button
+                className="sum-box"
                 value="b"
                 onClick={() => {
                   setSum("1000000");
                   DivideNumber(term, sum);
                 }}
               >
-                10Lakhs
+                10 Lakhs
               </Radio.Button>
               <Radio.Button
+                className="sum-box"
                 value="c"
                 onClick={() => {
                   setSum("1500000");
                   DivideNumber(term, sum);
                 }}
               >
-                15Lakhs
+                15 Lakhs
               </Radio.Button>
               <Radio.Button
+                className="sum-box"
                 value="d"
                 onClick={() => {
                   setSum("2000000");
                   DivideNumber(term, sum);
                 }}
               >
-                20Lakhs
+                20 Lakhs
               </Radio.Button>
               <Radio.Button
+                className="sum-box"
                 value="e"
                 onClick={() => {
                   setSum("2500000");
                   DivideNumber(term, sum);
                 }}
               >
-                25Lakhs
+                25 Lakhs
               </Radio.Button>
               <Radio.Button
+                className="sum-box"
                 value="f"
                 onClick={() => {
                   setSum("5000000");
                   DivideNumber(term, sum);
                 }}
               >
-                50Lakhs
+                50 Lakhs
               </Radio.Button>
               <Title level={5}>OR</Title>
               <Input
@@ -200,7 +220,7 @@ export const Investment = ({
                 className="input_sum"
                 value={sum}
                 required
-                style={{ marginBottom: 20 }}
+                style={{ fontFamily: "Inter" }}
                 onChange={(e) => {
                   // handleTerm(e);
                   console.log(":::", e.target.value);

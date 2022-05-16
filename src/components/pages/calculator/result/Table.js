@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { Modal, Tooltip } from "antd";
 
-const Table = ({ sum, term, category }) => {
+const Table = ({ sum, term, category, userFormValues }) => {
   const results = useSelector((state) => state.allResults.results);
   // console.log("results", results);
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const Table = ({ sum, term, category }) => {
   const confirmation = () => {
     if (sum) {
       navigate("/confirm", {
-        state: { sum, term, category },
+        state: { sum, term, category, userFormValues },
       });
     } else {
       console.log("error");

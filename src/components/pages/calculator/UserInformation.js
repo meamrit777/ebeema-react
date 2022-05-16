@@ -35,7 +35,7 @@ const UserInformation = ({
       console.log("True", userFormValues, "province:", province);
       //arko page
       navigate("/calculator/result", {
-        state: { info, age, term, sum },
+        state: { info, age, term, sum, userFormValues },
       });
     } else {
       console.log("error", userFormValues);

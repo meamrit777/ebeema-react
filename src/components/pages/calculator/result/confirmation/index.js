@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Steps, Button, Input, Form } from "antd";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLocation } from "react-router-dom";
 import {
   faFacebook,
   faInstagram,
@@ -34,6 +35,27 @@ const steps = [
 const Confirm = () => {
   const [current, setCurrent] = useState(0);
   const [form] = Form.useForm();
+
+  const location = useLocation();
+  const [category, setCategory] = useState("");
+  const [age, setAge] = useState();
+  const [sum, setSum] = useState();
+  const [term, setTerm] = useState();
+
+  const initialValues = { Name: "", phoneNo: "", email: "" };
+  const [userFormValues, setUserFormValues] = useState(initialValues);
+
+  useEffect(() => {
+    if (location.state) {
+      // setdataProducts(products?.data?.catagories);
+      setCategory(location.state.info);
+      setAge(location.state.age);
+      setSum(location.state.sum);
+      setTerm(location.state.term);
+      console.log("lplp", location.state.userFormValues);
+      setUserFormValues(location.state.userFormValues);
+    }
+  }, [location]);
 
   const next = () => {
     setCurrent(current + 1);
@@ -77,6 +99,8 @@ const Confirm = () => {
                     <label>Name:</label>
                     <br />
                     <Input
+                      readonly=""
+                      value={userFormValues.Name}
                       type="text"
                       name="Name"
                       // onChange={handleChange}
@@ -89,6 +113,8 @@ const Confirm = () => {
                     <label>Term:</label>
                     <br />
                     <Input
+                      readonly=""
+                      value={term}
                       type="text"
                       name="term"
                       style={{ width: "100%", height: 40 }}
@@ -98,7 +124,9 @@ const Confirm = () => {
                     <label>Sum Assured:</label>
                     <br />
                     <Input
+                      readonly=""
                       type="text"
+                      value={sum}
                       name="sum"
                       style={{ width: "100%", height: 40 }}
                     />
@@ -285,7 +313,11 @@ const Confirm = () => {
           current === 4 ? (
             <div className="last-step">
               <p className="">Success !</p>
-              <img src="https://scalebranding.com/wp-content/uploads/2020/07/small-panda-01.jpg" alt="image" width="200" />
+              <img
+                src="https://scalebranding.com/wp-content/uploads/2020/07/small-panda-01.jpg"
+                alt="image"
+                width="200"
+              />
               <p>Successfully processed insurance policy from eBeema.</p>
             </div>
           ) : (

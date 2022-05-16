@@ -11,6 +11,7 @@ const Result = () => {
   const [age, setAge] = useState();
   const [sum, setSum] = useState();
   const [term, setTerm] = useState();
+  const [userFormValues, setUserFormValues] = useState();
   useEffect(() => {
     if (location.state) {
       // setdataProducts(products?.data?.catagories);
@@ -18,6 +19,8 @@ const Result = () => {
       setAge(location.state.age);
       setSum(location.state.sum);
       setTerm(location.state.term);
+      console.log("lplp", location.state.userFormValues);
+      setUserFormValues(location.state.userFormValues);
     }
   }, [location]);
   // console.log("location from userInformation = ", location.state.info);
@@ -37,7 +40,12 @@ const Result = () => {
           sum={sum}
           setSum={setSum}
         />
-        <Table sum={sum} term={term} category={category} />
+        <Table
+          sum={sum}
+          term={term}
+          category={category}
+          userFormValues={userFormValues}
+        />
         {/* <Test2 /> */}
       </div>
     </>
