@@ -15,7 +15,7 @@ import { fetchAllResult } from "../../../../redux/result/ResultAction";
 // import SelectInput from "@material-ui/core/Select/SelectInput";
 import "./index.css";
 
-const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
+const Filter = ({ age, setAge, term, setTerm, sum, setSum, mop, setMop }) => {
   const [form] = Form.useForm();
   const { Option } = Select;
 
@@ -50,10 +50,15 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
   function disabledDate(current) {
     return current && current > moment().endOf("day");
   }
+  // const handleChangeMOP = (value, index) => {
+  //   // console.log("sagun", value);
+  //   setMop(value);
+  // };
+
   useEffect(() => {
     onChange();
   }, []);
-
+  console.log("sagun", mop);
   return (
     <div>
       <Form form={form} name="filter" size="default" className="filter-form">
@@ -81,7 +86,7 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
               outline: "none",
               paddingLeft: 10,
             }}
-            value={age}
+            value={isNaN(age) ? 0 : age}
             readonly=""
           />
           {/* <input style={{ border: "none", outline: "none" }} readonly /> */}
@@ -136,13 +141,13 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum }) => {
           <Select
             className="dropdown-filter"
             placeholder="Select A Mop"
-            // onChange={(value, index) => {
-            //   handleChangeCategory(value, index);
-            //   onChange();
-            // }}
+            onChange={(value, index) => {
+              setMop(value);
+              // handleChangeMOP(value, index);
+            }}
           >
             {modeOfPayment?.map((data, index) => (
-              <Option key={index}>{data}</Option>
+              <Option key={data}>{data}</Option>
             ))}
           </Select>
         </Form.Item>

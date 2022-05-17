@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { Modal, Tooltip } from "antd";
 
-const Table = ({ sum, term, category, userFormValues }) => {
+const Table = ({ sum, term, category, userFormValues, mop }) => {
   const results = useSelector((state) => state.allResults.results);
   // console.log("results", results);
   const dispatch = useDispatch();
@@ -15,7 +15,8 @@ const Table = ({ sum, term, category, userFormValues }) => {
   const [modalData, setModalData] = useState();
   const [showviewModal, setViewShowModal] = useState(false);
   const [showfaicon, setShowFaIcon] = useState(true);
-
+  const [company, setCompany] = useState();
+  const [parentCompany, setParentCompany] = useState();
   const navigate = useNavigate();
 
   const toggleIcon = () => {
@@ -45,23 +46,32 @@ const Table = ({ sum, term, category, userFormValues }) => {
   const showViewModal = () => {
     setViewShowModal(true);
   };
-  console.log("modalDAta", modalData);
+  // console.log("modalDAta", modalData);
 
   const confirmation = () => {
     if (sum) {
       navigate("/confirm", {
-        state: { sum, term, category, userFormValues },
+        state: {
+          sum,
+          term,
+          category,
+          userFormValues,
+          mop,
+          company,
+          parentCompany,
+        },
       });
     } else {
       console.log("error");
     }
   };
+  console.log("hola", company);
   return (
     <div className="">
       <div className="compare-header-info">
         <div className="sumassured-items">
           <div className="sumassured-title">
-            <h1>Sum Assured</h1>
+            <h2>Sum Assured</h2>
           </div>
           <div className="sumassured-number-wrapper">
             <p>{sum}</p>
@@ -174,7 +184,7 @@ const Table = ({ sum, term, category, userFormValues }) => {
                         // className="select-plan"
                         onClick={() => {
                           setModalData(data);
-                          console.log("data", data);
+                          // console.log("datan", data);
                           showViewPlan();
                         }}
                       >
@@ -186,7 +196,11 @@ const Table = ({ sum, term, category, userFormValues }) => {
                       <button
                         className="select-plan"
                         onClick={() => {
-                          confirmation();
+                          setCompany(data.name);
+                          setParentCompany(data.company.name);
+                          // console.log("firstt", data.name);
+                          // console.log("firstt", data.company.name);
+                          // confirmation();
                         }}
                       >
                         Select Plan
@@ -230,6 +244,10 @@ const Table = ({ sum, term, category, userFormValues }) => {
           </div>
         </Modal>
       </div>
+      <p>
+        *Maturity Value is subject to change as per each year's bonus rate
+        published by Beema Samiti.
+      </p>
     </div>
   );
 };

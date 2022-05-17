@@ -190,7 +190,7 @@ a.readmore-class {
 }
 .team_card {
   text-align: center;
-  width:calc(100% / 3 - 20px);
+  width: calc(100% / 3 - 20px);
 }
 .team_card:first-child {
   width: 100%;
@@ -208,10 +208,10 @@ a.readmore-class {
   transform: translate(0, -45px);
   min-height: 200px;
 }
-.team_card:first-child.card_description{
-  width: 50%;
-
+.team_card:first-child.card_description {
+  width: 33% !important;
 }
+
 .team_image {
   height: 360px;
   background-position: center;
@@ -219,6 +219,9 @@ a.readmore-class {
   background-size: cover;
   object-fit: cover;
   width: 100%;
+}
+.team_image_1 {
+  width: 33%;
 }
 .team_facebook {
   color: #3c6fbd;

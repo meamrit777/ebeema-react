@@ -46,3 +46,7 @@
   box-shadow: 0 0 4px rgb(0 0 0 / 20%);
   /* border: 1px solid rgba(0, 0, 0, 0.1); */
 }
+
+.input.ant-input.ant-input-lg.confirm-username:focus {
+  font-weight: 500 !important;
+}

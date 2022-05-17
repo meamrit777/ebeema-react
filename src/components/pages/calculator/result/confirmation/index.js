@@ -40,11 +40,14 @@ const Confirm = () => {
   const [category, setCategory] = useState("");
   const [age, setAge] = useState();
   const [sum, setSum] = useState();
+  const [mop, setMop] = useState("");
   const [term, setTerm] = useState();
 
   const initialValues = { Name: "", phoneNo: "", email: "" };
   const [userFormValues, setUserFormValues] = useState(initialValues);
-
+  const [company, setCompany] = useState("");
+  const [parentCompany, setParentCompany] = useState("");
+  console.log("whola:", company);
   useEffect(() => {
     if (location.state) {
       // setdataProducts(products?.data?.catagories);
@@ -52,11 +55,13 @@ const Confirm = () => {
       setAge(location.state.age);
       setSum(location.state.sum);
       setTerm(location.state.term);
-      console.log("lplp", location.state.userFormValues);
       setUserFormValues(location.state.userFormValues);
+      setMop(location.state.mop);
+      setCompany(location.state.company);
+      setParentCompany(location.state.parentCompany);
     }
   }, [location]);
-
+  console.log("mop:", mop);
   const next = () => {
     setCurrent(current + 1);
   };
@@ -64,8 +69,11 @@ const Confirm = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
-
-  // console.log("steps.length", steps.length);
+  const handleChange = (e) => {
+    // console.log(e.target);
+    const { name, value } = e.target;
+    setUserFormValues({ ...userFormValues, [name]: value });
+  };
 
   return (
     <>
@@ -94,17 +102,18 @@ const Confirm = () => {
             <div className="step-wrapper">
               <div>
                 <Form form={form} name="userInfo" size="large">
-                  <h3>Selected Product:</h3>
+                  <h3>
+                    Selected Product:{company}({parentCompany}){" "}
+                  </h3>
                   <Form.Item>
                     <label>Name:</label>
                     <br />
                     <Input
-                      readonly=""
+                      className="confirm-username"
                       value={userFormValues.Name}
                       type="text"
                       name="Name"
-                      // onChange={handleChange}
-                      // value={Name}
+                      onChange={handleChange}
                       placeholder="Name"
                       style={{ width: "100%", height: 40 }}
                     />
@@ -114,26 +123,41 @@ const Confirm = () => {
                     <br />
                     <Input
                       readonly=""
+                      // disabled
                       value={term}
                       type="text"
                       name="term"
-                      style={{ width: "100%", height: 40 }}
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        color: "#2c3e50",
+                      }}
                     />
                   </Form.Item>
                   <Form.Item>
                     <label>Sum Assured:</label>
                     <br />
                     <Input
+                      // disabled={true}
                       readonly=""
                       type="text"
                       value={sum}
                       name="sum"
-                      style={{ width: "100%", height: 40 }}
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        color: "#2c3e50",
+                      }}
                     />
                   </Form.Item>
                   <Form.Item>
                     <label>Mode of Payment:</label>
                     <br />
+                    <select disabled style={{ width: "100%", border: "none" }}>
+                      <option>{mop}</option>
+                    </select>
                   </Form.Item>
                   <Form.Item>
                     <label>Benefit:</label>

@@ -11,6 +11,7 @@ const Result = () => {
   const [age, setAge] = useState();
   const [sum, setSum] = useState();
   const [term, setTerm] = useState();
+  const [mop, setMop] = useState("");
   const [userFormValues, setUserFormValues] = useState();
   useEffect(() => {
     if (location.state) {
@@ -39,12 +40,15 @@ const Result = () => {
           setTerm={setTerm}
           sum={sum}
           setSum={setSum}
+          mop={mop}
+          setMop={setMop}
         />
         <Table
           sum={sum}
           term={term}
           category={category}
           userFormValues={userFormValues}
+          mop={mop}
         />
         {/* <Test2 /> */}
       </div>

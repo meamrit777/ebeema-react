@@ -554,7 +554,7 @@ const Calculator = () => {
               style={{ height: 45, width: 222 }}
             />
             <Input
-              value={age}
+              value={isNaN(age) ? 0 : age}
               // placeholder="0"
               // onChange={handleChange}
               style={{

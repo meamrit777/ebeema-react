@@ -2,7 +2,7 @@ const About_Data = [
   {
     image: (
       <img
-        className="team_image"
+        className="team_image_1"
         src="./image/aboutImages/1641894255.jpg"
         alt=""
       />
