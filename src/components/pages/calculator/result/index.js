@@ -11,8 +11,11 @@ const Result = () => {
   const [age, setAge] = useState();
   const [sum, setSum] = useState();
   const [term, setTerm] = useState();
-  const [mop, setMop] = useState("");
+  const [mop, setMop] = useState("yearly");
   const [userFormValues, setUserFormValues] = useState();
+  const [featureCheckbox, setFeatureCheckBox] = useState();
+  const [companyCheckbox, setCompanyCheckbox] = useState();
+
   useEffect(() => {
     if (location.state) {
       // setdataProducts(products?.data?.catagories);
@@ -42,6 +45,9 @@ const Result = () => {
           setSum={setSum}
           mop={mop}
           setMop={setMop}
+          category={category}
+          featureCheckbox={featureCheckbox}
+          setFeatureCheckBox={setFeatureCheckBox}
         />
         <Table
           sum={sum}
@@ -49,6 +55,7 @@ const Result = () => {
           category={category}
           userFormValues={userFormValues}
           mop={mop}
+          setFeatureCheckBox={setFeatureCheckBox}
         />
         {/* <Test2 /> */}
       </div>

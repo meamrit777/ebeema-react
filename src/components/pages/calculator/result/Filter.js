@@ -1,121 +1,150 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Form,
-  Input,
-  Checkbox,
-  Button,
-  DatePicker,
-  Select,
-  Tooltip,
-} from "antd";
+import { fetchSelectedResult } from "../../../../redux/result/ResultAction";
+import { useSelector, useDispatch } from "react-redux";
+import { Form, Input, Checkbox, DatePicker, Select } from "antd";
 import moment from "moment";
-import { fetchAllResult } from "../../../../redux/result/ResultAction";
-// import SelectInput from "@material-ui/core/Select/SelectInput";
-import "./index.css";
 
-const Filter = ({ age, setAge, term, setTerm, sum, setSum, mop, setMop }) => {
+const Filter = ({
+  age,
+  term,
+  sum,
+  setAge,
+  setTerm,
+  setSum,
+  featureCheckbox,
+  setFeatureCheckBox,
+  companyCheckbox,
+  setCompanyCheckbox,
+  category,
+}) => {
   const [form] = Form.useForm();
   const { Option } = Select;
 
   const results = useSelector((state) => state.allResults.results);
   const dispatch = useDispatch();
-
-  const [filterContent, setFilterContent] = useState([]);
+  const [filtercontent, setFilterContent] = useState();
   const [termOption, setTermOption] = useState([]);
   const [uniqueCompany, setUniqueCompany] = useState([]);
-  const [uniqueFeature, setUniqueFeature] = useState([]);
-  const [modeOfPayment, setModeOfPayment] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchAllResult());
-  }, []);
+  const [uniqueFeature, setUniqueFeature] = useState([]);
+  const [modeofpayment, setModeOfPayment] = useState([]);
+  const [mop, setMop] = useState();
 
   useEffect(() => {
     if (results?.data) {
-      setFilterContent(Object.values(results.data));
+      setFilterContent(Object.values(results.data.products));
       setTermOption(results.data.terms);
       setUniqueCompany(results.data.companies);
       setUniqueFeature(results.data.features);
       setModeOfPayment(results.data.mops);
     }
   }, [results]);
-  function onChange(date) {
+
+  function onMOPChange(e) {
+    console.log("e");
+  }
+  // function onTermChange(e) {
+  //   console.log(`m`, e);
+  //   setTerm(e);
+  // }
+  function onOptionclick(e) {
+    // e.preventdefault();
+    console.log("e");
+  }
+  function onDateChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
     const calAge = moment().diff(userDOB, "years");
     setAge(calAge);
-    // console.log("first", calAge);
   }
   function disabledDate(current) {
     return current && current > moment().endOf("day");
   }
-  // const handleChangeMOP = (value, index) => {
-  //   // console.log("sagun", value);
-  //   setMop(value);
-  // };
 
   useEffect(() => {
-    onChange();
+    onDateChange();
   }, []);
-  console.log("sagun", mop);
+  // console.log("mopp", mop);
+
+  function onCompanyChange(checkedValues) {
+    console.log("checked  ", checkedValues);
+    let value = checkedValues || [];
+    const data = {
+      category: category,
+      age: age,
+      child_age: "0",
+      proposer_age: "0",
+      husband_age: "0",
+      wife_age: "0",
+      term: term,
+      sum_assured: sum,
+      mop: mop,
+      invest: "100000.00",
+      "company_id[]": value,
+      features: [],
+    };
+    // setCompanyCheckbox(checkedValues);
+    dispatch(fetchSelectedResult(data));
+  }
+  function onFeatureChange(checkedfeatureValues) {
+    console.log("checked  ", checkedfeatureValues);
+    setFeatureCheckBox(checkedfeatureValues);
+  }
+// console.log("featureCheckbox",companyCheckbox)
   return (
     <div>
-      <Form form={form} name="filter" size="default" className="filter-form">
-        <Form.Item className="policy-filter">
-          <p>Policy filter</p>
+      <Form form={form} name="calc_modal" size="small" className="filter-form">
+        <Form.Item>
+          <h1 className="policy-filter">Policy filter</h1>
         </Form.Item>
 
-        <Form.Item>
-          <p>
-            <b>Date of birth</b>
-          </p>
-          <DatePicker
-            placeholder="Select Date of Birth"
-            disabledDate={disabledDate}
-            onChange={onChange}
-            style={{ height: 40, width: "100%" }}
-          />
-
-          <input
-            type="text"
-            style={{
-              width: "100%",
-              height: 40,
-              border: "none",
-              outline: "none",
-              paddingLeft: 10,
-            }}
-            value={isNaN(age) ? 0 : age}
-            readonly=""
-          />
-          {/* <input style={{ border: "none", outline: "none" }} readonly /> */}
-          {/* {age} */}
+        <Form.Item name="filterAge">
+          <div className="compare-list">
+            <h3 className="filter-dob">Date of Birth</h3>
+            <DatePicker
+              className="filter-datepicker"
+              disabledDate={disabledDate}
+              onChange={onDateChange}
+              style={{ height: 40, width: "100%" }}
+            />
+            <Input
+              value={isNaN(age) ? 0 : age}
+              style={{
+                width: "100%",
+                height: 40,
+                border: "none",
+                outline: "none",
+              }}
+            />
+          </div>
         </Form.Item>
 
-        <Form.Item>
-          <b>Terms</b>
-          <br />
-          <br />
+        <Form.Item
+          style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}
+          name="filterTerm"
+        >
+          <h3 className="filter-dob">Term</h3>
+
           <Select
-            className="dropdown-filter"
-            placeholder="Select a term"
-            // style={{ width: "100%" }}
+            className="dropdown-category"
             value={term}
             onChange={(value) => {
               setTerm(value);
             }}
+            onClick={onOptionclick}
+            style={{ width: "100%" }}
           >
-            {termOption?.map((data, index) => (
-              <Option key={data}>{data}</Option>
+            {termOption?.map((item) => (
+              <Option key={item}>{item}</Option>
             ))}
           </Select>
         </Form.Item>
 
-        <Form.Item>
-          <p>
-            <b>Sum Assured</b>
-          </p>
+        <Form.Item
+          style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}
+          name="filtersum"
+        >
+          <h3>Sum Assured</h3>
           <input
             type="text"
             style={{
@@ -123,7 +152,6 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum, mop, setMop }) => {
               height: 40,
               border: "none",
               outline: "none",
-              paddingLeft: 10,
             }}
             value={sum}
             onChange={(e) => {
@@ -134,74 +162,52 @@ const Filter = ({ age, setAge, term, setTerm, sum, setSum, mop, setMop }) => {
           />
         </Form.Item>
 
-        <Form.Item>
-          <p>
-            <b>Mode of Payment</b>
-          </p>
+        <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
+          <h3>Mode of Payment</h3>
           <Select
-            className="dropdown-filter"
-            placeholder="Select A Mop"
             onChange={(value, index) => {
               setMop(value);
-              // handleChangeMOP(value, index);
             }}
+            onClick={onOptionclick}
+            className="dropdown-category"
+            placeholder="Select A Mop"
+            style={{ width: "100%" }}
           >
-            {modeOfPayment?.map((data, index) => (
-              <Option key={data}>{data}</Option>
+            {modeofpayment?.map((item, index) => (
+              <Option key={item}>{item}</Option>
             ))}
           </Select>
         </Form.Item>
 
-        <Form.Item>
-          <p>Company</p>
-          <br />
-          <Checkbox className="filter" onChange={onChange}>
-            NLIC Nepal Life Insurance Company
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange}>
-            LIC Life Insurance Corporation
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange}>
-            National Life Insurance Company Limited
-          </Checkbox>
+        <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
+          <p className="filter-subtitle">Company</p>{" "}
+          <Checkbox.Group style={{ width: "100%" }} onChange={onCompanyChange}>
+            {uniqueCompany?.map((item, index) => (
+              <div key={item.id}>
+                <Checkbox value={item.id}>{item.name}</Checkbox>
+              </div>
+            ))}
+          </Checkbox.Group>
         </Form.Item>
 
-        <Form.Item>
-          <p>Features</p>
-          <br />
-          <Checkbox onChange={onChange}>
-            Accidental Death Benefits (adb)
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="a">
-            Term Rider
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="b">
-            Premium Waiver Benefit (PWB)
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="c">
-            PTD/PWB
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="d">
-            ADB/PTD/PWB
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="e">
-            PTD
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="f">
-            Critical Illness (CI)
-          </Checkbox>
-          <br />
-          <Checkbox onChange={onChange} value="g">
-            asfdsfdsf
-          </Checkbox>
+        <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
+          <p className="filter-subtitle">Feature</p>
+          <Checkbox.Group style={{ width: "100%" }} onChange={onFeatureChange}>
+            {uniqueFeature?.map((item, index) => (
+              <div key={item.id}>
+                <Checkbox
+                  value={item.id}
+                  // onClick={() => {
+                  //   setCheckBoxData(item.name);
+                  //   console.log("item.name", item.name);
+                  // }}
+                  // onChange={onFeatureChange}
+                >
+                  {item.name}
+                </Checkbox>
+              </div>
+            ))}
+          </Checkbox.Group>
         </Form.Item>
       </Form>
     </div>

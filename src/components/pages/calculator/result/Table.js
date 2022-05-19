@@ -31,7 +31,7 @@ const Table = ({ sum, term, category, userFormValues, mop }) => {
   useEffect(() => {
     setModalData(resultcontent);
   }, [resultcontent]);
-  console.log("resultcontent", resultcontent);
+  // console.log("resultcontent", resultcontent);
 
   useEffect(() => {
     dispatch(fetchAllResult());
@@ -65,7 +65,7 @@ const Table = ({ sum, term, category, userFormValues, mop }) => {
       console.log("error");
     }
   };
-  console.log("hola", company);
+  // console.log("hola", company);
   return (
     <div className="">
       <div className="compare-header-info">
@@ -194,13 +194,13 @@ const Table = ({ sum, term, category, userFormValues, mop }) => {
                       <br />
 
                       <button
-                        className="select-plan"
-                        onClick={() => {
+                        onMouseEnter={() => {
                           setCompany(data.name);
                           setParentCompany(data.company.name);
-                          // console.log("firstt", data.name);
-                          // console.log("firstt", data.company.name);
-                          // confirmation();
+                        }}
+                        className="select-plan"
+                        onClick={() => {
+                          confirmation();
                         }}
                       >
                         Select Plan

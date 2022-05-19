@@ -101,10 +101,10 @@ const Confirm = () => {
           {current === 0 ? (
             <div className="step-wrapper">
               <div>
+                <h1 className="step-title">
+                  Selected Product: {company}({parentCompany})
+                </h1>
                 <Form form={form} name="userInfo" size="large">
-                  <h3>
-                    Selected Product:{company}({parentCompany}){" "}
-                  </h3>
                   <Form.Item>
                     <label>Name:</label>
                     <br />
@@ -161,11 +161,12 @@ const Confirm = () => {
                   </Form.Item>
                   <Form.Item>
                     <label>Benefit:</label>
+                    <p>No Benefits selected</p>
                   </Form.Item>
                   <Form.Item>
                     <Button
                       className="confim-button"
-                      type="primary"
+                      style={{ background: "#3d538c", color: "white" }}
                       onClick={() => next()}
                     >
                       Next Step
@@ -185,8 +186,6 @@ const Confirm = () => {
                     <Input
                       type="text"
                       name="Name"
-                      // onChange={handleChange}
-                      // value={Name}
                       placeholder="Name"
                       style={{ width: "100%", height: 40 }}
                     />
@@ -213,14 +212,14 @@ const Confirm = () => {
                   <Form.Item>
                     <Button
                       className="confim-button"
-                      type="primary"
+                      style={{ background: "#3d538c", color: "white" }}
                       onClick={() => next()}
                     >
                       Next Step
                     </Button>
                     <Button
                       className="confim-button"
-                      style={{ margin: "0 8px" }}
+                      style={{ margin: "0 8px", color: "#a3a3a3" }}
                       onClick={() => prev()}
                     >
                       Previous
@@ -229,120 +228,133 @@ const Confirm = () => {
                 </Form>
               </div>
             </div>
-          ) : // <div>
-          //   <p className="info-para">"Money"</p>
-          //   <Button type="primary" onClick={() => next()}>
-          //     Next
-          //   </Button>
-          //   <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-          //     Previous
-          //   </Button>
-          // </div>
-          current === 2 ? (
+          ) : current === 2 ? (
             <div className="step-wrapper">
               <div>
+                <h3 className="step-title">Personal Information:</h3>
                 <Form form={form} name="userInfo" size="large">
-                  <h3>Selected Product:</h3>
                   <Form.Item>
-                    <label>Name:</label>
-                    <br />
                     <Input
-                      type="text"
-                      name="Name"
-                      // onChange={handleChange}
-                      // value={Name}
-                      placeholder="Name"
-                      style={{ width: "100%", height: 40 }}
+                      value={userFormValues.email}
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      onChange={handleChange}
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        color: "#2c3e50",
+                      }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Term:</label>
-                    <br />
                     <Input
-                      type="text"
-                      name="term"
-                      style={{ width: "100%", height: 40 }}
+                      value={userFormValues.phoneNo}
+                      type="number"
+                      name="phoneNo"
+                      onChange={handleChange}
+                      placeholder="Contact No."
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        color: "#2c3e50",
+                      }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Sum Assured:</label>
+                    <label>Citizenship Front Image</label>
                     <br />
                     <Input
-                      type="text"
-                      name="sum"
-                      style={{ width: "100%", height: 40 }}
+                      type="file"
+                      name="front_citizen"
+                      accept="image/*"
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        border: "none",
+                        color: "#2c3e50",
+                      }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label>Mode of Payment:</label>
+                    <label>Citizenship Back Image</label>
                     <br />
-                  </Form.Item>
-                  <Form.Item>
-                    <label>Benefit:</label>
+                    <Input
+                      type="file"
+                      name="back_citizen"
+                      accept="image/*"
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        outline: "none",
+                        border: "none",
+                        color: "#2c3e50",
+                      }}
+                    />
                   </Form.Item>
                   <Form.Item>
                     <Button
                       className="confim-button"
-                      type="primary"
+                      style={{ background: "#3d538c", color: "white" }}
                       onClick={() => next()}
                     >
                       Next Step
                     </Button>
-                    <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                    <Button
+                      className="confim-button"
+                      style={{ margin: "0 8px", color: "#a3a3a3" }}
+                      onClick={() => prev()}
+                    >
                       Previous
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
             </div>
-          ) : // <div>
-          //   <p className="info-para">"child"</p>
-          //   <Button type="primary" onClick={() => next()}>
-          //     Next
-          //   </Button>
-          //   <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-          //     Previous
-          //   </Button>
-          // </div>
-          current === 3 ? (
+          ) : current === 3 ? (
             <div className="step-wrapper">
               <div>
+                <h2 className="step-title payment">
+                  Request for payment collection
+                </h2>
                 <Form form={form} name="userInfo" size="large">
-                  <h2 className="step-title">Request for payment collection</h2>
                   <Form.Item className="payment-confirmation-button">
                     <Button
-                      style={{ width: "50%" }}
+                      style={{ width: "40%", left: "30%" }}
                       type="primary"
                       onClick={() => next()}
                     >
                       Confirm Request
                     </Button>
                     <br />
-                    <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                    <br />
+                    <Button
+                      style={{
+                        float: "right",
+                        width: "33%",
+                        margin: "0 8px",
+                        color: "#a3a3a3",
+                      }}
+                      onClick={() => prev()}
+                    >
                       Previous
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
             </div>
-          ) : // <div>
-          //   <p className="info-para">"whole"</p>
-          //   <Button type="primary" onClick={() => next()}>
-          //     Done
-          //   </Button>
-          //   <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-          //     Previous
-          //   </Button>
-          // </div>
-          current === 4 ? (
+          ) : current === 4 ? (
             <div className="last-step">
-              <p className="">Success !</p>
-              <img
-                src="https://scalebranding.com/wp-content/uploads/2020/07/small-panda-01.jpg"
-                alt="image"
-                width="200"
-              />
-              <p>Successfully processed insurance policy from eBeema.</p>
+              <h1 className="">Success !</h1>
+              <br />
+              <br />
+              <img src="./image/ok_v2.png" alt="image" />
+              <br />
+              <br />
+              <h5>Successfully processed insurance policy from eBeema.</h5>
             </div>
           ) : (
             ""

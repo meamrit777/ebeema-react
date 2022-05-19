@@ -29,22 +29,49 @@
   margin-bottom: 0;
 }
 .step-title {
-  /* background: #fafafa; */
+  background: #fafafa;
   width: 100%;
+  padding: 15px 25px;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #3d538c;
+  margin-bottom: 25px;
+}
+.step-title.payment {
   text-align: center;
+}
+/* .step-title {
+  background: #fafafa;
+  width: 100%;
   padding: 15px 25px;
   font-size: 16px !important;
   font-weight: 500 !important;
   color: #3d538c;
-}
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+} */
+
 .payment-confirmation-button {
   display: flex;
   justify-content: center;
 }
 
 .last-step {
+  padding: 15px 30px;
+  width: 47%;
   box-shadow: 0 0 4px rgb(0 0 0 / 20%);
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  text-align: center;
+}
+.last-step h1 {
+  font-size: 21px;
+  color: #2c3e50;
+}
+
+.last-step h5 {
+  font-size: 18px;
+  font-family: Roboto !important;
+  color: #333;
+  margin: 0;
 }
 
 .input.ant-input.ant-input-lg.confirm-username:focus {
