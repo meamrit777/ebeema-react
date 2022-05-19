@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   Form,
   Input,
@@ -22,6 +22,9 @@ import UserInformation from "./UserInformation";
 // import { isEmpty } from "lodash-es";
 
 const Calculator = () => {
+  const location = useLocation();
+
+  // const [selCategory, setSelCategory] = useState();
   const [info, setInfo] = useState("");
   const [age, setAge] = useState(0);
   console.log("agww", age);
@@ -48,9 +51,15 @@ const Calculator = () => {
   const { Title } = Typography;
 
   const dispatch = useDispatch();
-  const [dataProducts, setdataProducts] = useState([]);
+  const [dropCategory, setdropCategory] = useState([]);
 
   const products = useSelector((state) => state.allProducts.products);
+  useEffect(() => {
+    if (location.state) {
+      // setSelCategory(location.state.selCategory);
+      setInfo(location.state.selCategory);
+    }
+  }, [location]);
 
   const tooltipStyle = { marginLeft: 5, color: "#888", fontSize: "1em" };
   // useEffect(() => {
@@ -59,7 +68,7 @@ const Calculator = () => {
   console.log("dd", localStorage.getItem("category"));
   useEffect(() => {
     if (products?.data) {
-      setdataProducts(products?.data?.catagories);
+      setdropCategory(products?.data?.catagories);
     }
   }, [products]);
 
@@ -88,6 +97,7 @@ const Calculator = () => {
 
   function onChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
+    console.log("moment date", date);
     const calAge = moment().diff(userDOB, "years");
     console.log("agee", calAge);
     const desc = () => {
@@ -298,6 +308,7 @@ const Calculator = () => {
     setMinAge(index.min_age);
     setMaxAge(index.max_age);
     // setWarnText("");
+    // setSelCategory(value);
   };
   const showModal = () => {
     setVisible(true);
@@ -342,12 +353,13 @@ const Calculator = () => {
                 <Select
                   className="dropdown-category"
                   placeholder="Select Category"
+                  value={info}
                   onChange={(value, index) => {
                     handleChangeCategory(value, index);
                     onChange();
                   }}
                 >
-                  {dataProducts?.map((data, index) => (
+                  {dropCategory?.map((data, index) => (
                     <option
                       key={index}
                       value={data.category_code}

@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import playbutton from "../SvgIcons/playbutton.svg";
 import calculatorIcon from "../SvgIcons/calculator.svg";
 import HomeData from "./HomeData";
 import { HomeDataPolicy, whyEbeemaData, howWorkData } from "./HomeData";
-import { Carousel, Modal } from "antd";
+import { Button, Carousel, Modal, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import Corporate from "./Corporate";
+import { fetchAllCategory } from "../../../redux/calculator/CalculatorAction";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const { Option } = Select;
+
+  const [dropCategory, setdropCategory] = useState([]);
+  const products = useSelector((state) => state.allProducts.products);
+
   const [youtubeVisible, setYoutubeVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [selCategory, setSelCategory] = useState();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialValues = {
     Name: "",
@@ -22,12 +33,30 @@ function Home() {
   };
   const [userFormValues, setUserFormValues] = useState(initialValues);
 
+  useEffect(() => {
+    if (products?.data) {
+      setdropCategory(products?.data?.catagories);
+    }
+  }, [products]);
+  useEffect(() => {
+    dispatch(fetchAllCategory()); //action import garera useeffet
+  }, []);
+
+  const gotoNextPage = () => {
+    navigate("/calculator", {
+      state: { selCategory },
+    });
+  };
+  const handleChangeCategory = (value, index) => {
+    // console.log("dolpa", value);
+    setSelCategory(value);
+  };
+  console.log("selCategory:", selCategory);
+
   const showModal = () => {
     setVisible(true);
   };
-  // const handleClick = () => {
-  //   console.log("handle click");
-  // };
+
   const handleCancel = () => {
     setVisible(false);
   };
@@ -109,7 +138,7 @@ function Home() {
                   method="get"
                   action="#"
                 >
-                  <select className="insurance-lists" onChange={(e)=>{
+                  {/* <select className="insurance-lists" onChange={(e)=>{
                       localStorage.setItem('category',e.target.value)
                     }}>
                     <option value="" selected="selected" >
@@ -130,11 +159,46 @@ function Home() {
                     </option>
 
                     <option value="term">Term Life</option>
-                  </select>
-                  <Link to="/calculator" className="insurance-type-submit">
+                  </select> */}
+
+                  <Select
+                    size="large"
+                    className="dropdown-category"
+                    placeholder="Select Category"
+                    onChange={(value, index) => {
+                      handleChangeCategory(value, index);
+                    }}
+                  >
+                    {dropCategory?.map((data, index) => (
+                      <Option
+                        key={index}
+                        value={data.category_code}
+                        min_age={data.min_age}
+                        max_age={data.max_age}
+                        child_age_range={data.child_age_range}
+                        proposer_age_range={data.proposer_age_range}
+                        husband_age_range={data.husband_age_range}
+                        wife_age_range={data.wife_age_range}
+                      >
+                        {data.name}
+                      </Option>
+                    ))}
+                  </Select>
+                  {/* <Link
+                    to={{
+                      pathname: "/calculator",
+                      state: { selCategory: selCategory },
+                    }}
+                    className="insurance-type-submit"
+                  >
                     Compare
                     <img src={calculatorIcon} alt="compare calculator" />
-                  </Link>
+                  </Link> */}
+
+                  <a onClick={gotoNextPage} className="insurance-type-submit">
+                    Compare
+                    <img src={calculatorIcon} alt="compare calculator" />
+                  </a>
                 </form>
               </div>
             </div>
@@ -282,7 +346,7 @@ function Home() {
               We try to make your life as easy as cheese. Compare insurance to
               see which plan fits your needs.
             </p>
-            <Link to="/calculator" className="fa fa-calculator compare-btn">
+            <Link to={"/calculator"} className="fa fa-calculator compare-btn">
               Compare Now
             </Link>
           </div>

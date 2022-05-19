@@ -17,6 +17,8 @@ const Filter = ({
   companyCheckbox,
   setCompanyCheckbox,
   category,
+  mop,
+  setMop,
 }) => {
   const [form] = Form.useForm();
   const { Option } = Select;
@@ -29,7 +31,6 @@ const Filter = ({
 
   const [uniqueFeature, setUniqueFeature] = useState([]);
   const [modeofpayment, setModeOfPayment] = useState([]);
-  const [mop, setMop] = useState();
 
   useEffect(() => {
     if (results?.data) {
@@ -90,7 +91,7 @@ const Filter = ({
     console.log("checked  ", checkedfeatureValues);
     setFeatureCheckBox(checkedfeatureValues);
   }
-// console.log("featureCheckbox",companyCheckbox)
+  // console.log("featureCheckbox",companyCheckbox)
   return (
     <div>
       <Form form={form} name="calc_modal" size="small" className="filter-form">
@@ -172,6 +173,7 @@ const Filter = ({
             className="dropdown-category"
             placeholder="Select A Mop"
             style={{ width: "100%" }}
+            value={mop}
           >
             {modeofpayment?.map((item, index) => (
               <Option key={item}>{item}</Option>
