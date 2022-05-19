@@ -19,6 +19,7 @@ const Filter = ({
   category,
   mop,
   setMop,
+  userBirthDate,
 }) => {
   const [form] = Form.useForm();
   const { Option } = Select;
@@ -30,7 +31,7 @@ const Filter = ({
   const [uniqueCompany, setUniqueCompany] = useState([]);
 
   const [uniqueFeature, setUniqueFeature] = useState([]);
-  const [modeofpayment, setModeOfPayment] = useState([]);
+  const [modeOfPayment, setModeOfPayment] = useState([]);
 
   useEffect(() => {
     if (results?.data) {
@@ -66,7 +67,14 @@ const Filter = ({
     onDateChange();
   }, []);
   // console.log("mopp", mop);
-
+  function onChange(date) {
+    const userDOB = moment(date, "YYYY/M/D");
+    const calAge = moment().diff(userDOB, "years");
+    setAge(calAge);
+  }
+  useEffect(() => {
+    onChange();
+  }, []);
   function onCompanyChange(checkedValues) {
     console.log("checked  ", checkedValues);
     let value = checkedValues || [];
@@ -94,58 +102,22 @@ const Filter = ({
   // console.log("featureCheckbox",companyCheckbox)
   return (
     <div>
-      <Form form={form} name="calc_modal" size="small" className="filter-form">
+      <Form form={form} name="filter" size="default" className="filter-form">
+        <Form.Item className="policy-filter">
+          <p>Policy filter</p>
+        </Form.Item>
+
         <Form.Item>
-          <h1 className="policy-filter">Policy filter</h1>
-        </Form.Item>
+          <p>
+            <b>Date of birth</b>
+          </p>
+          <DatePicker
+            placeholder="Select Date of Birth"
+            disabledDate={disabledDate}
+            onChange={onChange}
+            style={{ height: 40, width: "100%" }}
+          />
 
-        <Form.Item name="filterAge">
-          <div className="compare-list">
-            <h3 className="filter-dob">Date of Birth</h3>
-            <DatePicker
-              className="filter-datepicker"
-              disabledDate={disabledDate}
-              onChange={onDateChange}
-              style={{ height: 40, width: "100%" }}
-            />
-            <Input
-              value={isNaN(age) ? 0 : age}
-              style={{
-                width: "100%",
-                height: 40,
-                border: "none",
-                outline: "none",
-              }}
-            />
-          </div>
-        </Form.Item>
-
-        <Form.Item
-          style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}
-          name="filterTerm"
-        >
-          <h3 className="filter-dob">Term</h3>
-
-          <Select
-            className="dropdown-category"
-            value={term}
-            onChange={(value) => {
-              setTerm(value);
-            }}
-            onClick={onOptionclick}
-            style={{ width: "100%" }}
-          >
-            {termOption?.map((item) => (
-              <Option key={item}>{item}</Option>
-            ))}
-          </Select>
-        </Form.Item>
-
-        <Form.Item
-          style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}
-          name="filtersum"
-        >
-          <h3>Sum Assured</h3>
           <input
             type="text"
             style={{
@@ -153,6 +125,46 @@ const Filter = ({
               height: 40,
               border: "none",
               outline: "none",
+              paddingLeft: 10,
+            }}
+            value={isNaN(age) ? 0 : age}
+            readonly=""
+          />
+          {/* <input style={{ border: "none", outline: "none" }} readonly /> */}
+          {/* {age} */}
+        </Form.Item>
+
+        <Form.Item>
+          <b>Terms</b>
+          <br />
+          <br />
+          <Select
+            className="dropdown-filter"
+            placeholder="Select a term"
+            // style={{ width: "100%" }}
+            value={term}
+            onChange={(value) => {
+              setTerm(value);
+            }}
+          >
+            {termOption?.map((data, index) => (
+              <Option key={data}>{data}</Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item>
+          <p>
+            <b>Sum Assured</b>
+          </p>
+          <input
+            type="text"
+            style={{
+              width: "100%",
+              height: 40,
+              border: "none",
+              outline: "none",
+              paddingLeft: 10,
             }}
             value={sum}
             onChange={(e) => {
@@ -163,26 +175,29 @@ const Filter = ({
           />
         </Form.Item>
 
-        <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
-          <h3>Mode of Payment</h3>
+        <Form.Item>
+          <p>
+            <b>Mode of Payment</b>
+          </p>
           <Select
+            className="dropdown-filter"
+            placeholder="Select A Mop"
+            defaultValue={mop}
             onChange={(value, index) => {
               setMop(value);
             }}
-            onClick={onOptionclick}
-            className="dropdown-category"
-            placeholder="Select A Mop"
-            style={{ width: "100%" }}
-            value={mop}
           >
-            {modeofpayment?.map((item, index) => (
-              <Option key={item}>{item}</Option>
-            ))}
+            {modeOfPayment?.map(
+              (data, index) => (
+                console.log("index", index),
+                (<Option key={data}>{data}</Option>)
+              )
+            )}
           </Select>
         </Form.Item>
 
         <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
-          <p className="filter-subtitle">Company</p>{" "}
+          <p className="filter-subtitle">Company</p>
           <Checkbox.Group style={{ width: "100%" }} onChange={onCompanyChange}>
             {uniqueCompany?.map((item, index) => (
               <div key={item.id}>

@@ -14,7 +14,9 @@ const UserInformation = ({
   setTerm,
   sum,
   setSum,
+  userBirthDate,
 }) => {
+  // console.log("userBirthDate", userBirthDate);
   const navigate = useNavigate();
   const { Option } = Select;
   const [form] = Form.useForm();

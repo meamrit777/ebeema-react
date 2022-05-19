@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 // import Test from "./Test";
 import Test2 from "./Test2";
 const Result = () => {
-  const location = useLocation();
+  const userValue = useLocation();
   const [category, setCategory] = useState("");
   const [age, setAge] = useState();
   const [sum, setSum] = useState();
@@ -15,20 +15,21 @@ const Result = () => {
   const [userFormValues, setUserFormValues] = useState();
   const [featureCheckbox, setFeatureCheckBox] = useState();
   const [companyCheckbox, setCompanyCheckbox] = useState();
+  const [userBirthDate, setUserBirthDate] = useState();
 
   useEffect(() => {
-    if (location.state) {
+    if (userValue.state) {
       // setdataProducts(products?.data?.catagories);
-      setCategory(location.state.info);
-      setAge(location.state.age);
-      setSum(location.state.sum);
-      setTerm(location.state.term);
-      console.log("lplp", location.state.userFormValues);
-      setUserFormValues(location.state.userFormValues);
+      setCategory(userValue.state.info);
+      setAge(userValue.state.age);
+      setSum(userValue.state.sum);
+      setTerm(userValue.state.term);
+      setUserFormValues(userValue.state.userFormValues);
+      console.log("userBirthDate1", userValue.state);
+      // setUserBirthDate(location.state.userBirthDate);
     }
-  }, [location]);
-  // console.log("location from userInformation = ", location.state.info);
-
+  }, [userValue]);
+  console.log("userBirthDate", age);
   return (
     <>
       <div class="top-navigation">
@@ -48,6 +49,7 @@ const Result = () => {
           category={category}
           featureCheckbox={featureCheckbox}
           setFeatureCheckBox={setFeatureCheckBox}
+          userBirthDate={userBirthDate}
         />
         <Table
           sum={sum}

@@ -52,7 +52,7 @@ const Calculator = () => {
 
   const dispatch = useDispatch();
   const [dropCategory, setdropCategory] = useState([]);
-
+  const [userBirthDate, setUserBirthDate] = useState();
   const products = useSelector((state) => state.allProducts.products);
   useEffect(() => {
     if (location.state) {
@@ -97,9 +97,10 @@ const Calculator = () => {
 
   function onChange(date) {
     const userDOB = moment(date, "YYYY/M/D");
-    console.log("moment date", date);
+    setUserBirthDate(date);
+    console.log("moment date", userDOB);
     const calAge = moment().diff(userDOB, "years");
-    console.log("agee", calAge);
+    // console.log("agee", calAge);
     const desc = () => {
       switch (info) {
         case "endowment":
@@ -561,6 +562,8 @@ const Calculator = () => {
             <br />
             {/* <Radio style={{ marginRight: 40 }}>AD</Radio> */}
             <DatePicker
+              // value={}
+              defaultValue={moment()}
               disabledDate={disabledDate}
               onChange={onChange}
               style={{ height: 45, width: 222 }}
@@ -633,6 +636,7 @@ const Calculator = () => {
             setTerm={setTerm}
             sum={sum}
             setSum={setSum}
+            userBirthDate={userBirthDate}
           />
         </Modal>
       </Form>
