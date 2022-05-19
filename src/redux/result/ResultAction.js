@@ -19,6 +19,7 @@ export const fetchAllResult = () => async (dispatch) => {
     "company_id[]": [],
     features: [],
   };
+
   const q = queryString.stringify(data);
 
   const response = await axios({
@@ -26,10 +27,10 @@ export const fetchAllResult = () => async (dispatch) => {
     url: `http://ispl.ebeema.com/api/life/calculation`,
     data: q,
   });
-
   console.log("responsesssss", response);
   dispatch({ type: ActionTypes.SET_RESULT, payload: response.data });
 };
+
 export const fetchSelectedResult = (data) => async (dispatch) => {
   const q = queryString.stringify(data);
 

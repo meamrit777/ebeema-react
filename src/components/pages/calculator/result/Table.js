@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllResult } from "../../../../redux/result/ResultAction";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
-import { Modal, Tooltip } from "antd";
+import { Modal } from "antd";
 
 const Table = ({ sum, term, category, userFormValues, mop }) => {
-  const results = useSelector((state) => state.allResults.results);
-  // console.log("results", results);
   const dispatch = useDispatch();
 
+  const results = useSelector((state) => state.allResults.results);
   const [resultcontent, setResultContent] = useState([]);
+  const filterresult = useSelector((state) => state.result);
+
   const [viewplan, setViewPlan] = useState(false);
   const [modalData, setModalData] = useState();
   const [showviewModal, setViewShowModal] = useState(false);
@@ -32,6 +33,12 @@ const Table = ({ sum, term, category, userFormValues, mop }) => {
     setModalData(resultcontent);
   }, [resultcontent]);
   // console.log("resultcontent", resultcontent);
+
+  useEffect(() => {
+    if (filterresult?.data) {
+      setResultContent(Object.values(filterresult?.data?.products));
+    }
+  }, [filterresult?.data]);
 
   useEffect(() => {
     dispatch(fetchAllResult());
@@ -87,7 +94,9 @@ const Table = ({ sum, term, category, userFormValues, mop }) => {
         </div>
       </div>
       <div className="compare-search-sort">
-        <p className="left-sort">{category} : Plans match your search</p>
+        <p className="left-sort">
+          {category} : {resultcontent.length} Plans match your search
+        </p>
         <div className="right-sort"></div>
       </div>
       <div className="compare-plans">

@@ -25,11 +25,11 @@ const Result = () => {
       setSum(userValue.state.sum);
       setTerm(userValue.state.term);
       setUserFormValues(userValue.state.userFormValues);
-      console.log("userBirthDate1", userValue.state);
+      // console.log("userBirthDate1", userValue.state);
       // setUserBirthDate(location.state.userBirthDate);
     }
   }, [userValue]);
-  console.log("userBirthDate", age);
+  // console.log("userBirthDate", age);
   return (
     <>
       <div class="top-navigation">
@@ -49,7 +49,9 @@ const Result = () => {
           category={category}
           featureCheckbox={featureCheckbox}
           setFeatureCheckBox={setFeatureCheckBox}
-          userBirthDate={userBirthDate}
+          companyCheckbox={companyCheckbox}
+          setCompanyCheckbox={setCompanyCheckbox}
+          // userBirthDate={userBirthDate}
         />
         <Table
           sum={sum}

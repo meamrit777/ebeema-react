@@ -75,9 +75,11 @@ const Filter = ({
   useEffect(() => {
     onChange();
   }, []);
+
   function onCompanyChange(checkedValues) {
     console.log("checked  ", checkedValues);
     let value = checkedValues || [];
+
     const data = {
       category: category,
       age: age,
@@ -198,6 +200,7 @@ const Filter = ({
 
         <Form.Item style={{ borderBottom: "1px solid #e0e0e0", padding: 15 }}>
           <p className="filter-subtitle">Company</p>
+
           <Checkbox.Group style={{ width: "100%" }} onChange={onCompanyChange}>
             {uniqueCompany?.map((item, index) => (
               <div key={item.id}>
